@@ -1,0 +1,102 @@
+[
+  {
+    "name": "React",
+    "icon": "/skills/skill-icon-react.jpg"
+  },
+  {
+    "name": "React Native",
+    "icon": "/skills/skill-icon-react-native.jpg"
+  },
+  {
+    "name": "Next.js",
+    "icon": "/skills/skill-icon-nextjs.jpg"
+  },
+  {
+    "name": "TypeScript",
+    "icon": "/skills/skill-icon-typescript.jpg"
+  },
+  {
+    "name": "JavaScript",
+    "icon": "/skills/skill-icon-javascript.jpg"
+  },
+  {
+    "name": "Node.js",
+    "icon": "/skills/skill-icon-nodejs.jpg"
+  },
+  {
+    "name": "Tailwind CSS",
+    "icon": "/skills/skill-icon-tailwindcss.jpg"
+  },
+  {
+    "name": "Sass",
+    "icon": "/skills/skill-icon-sass.jpg"
+  },
+  {
+    "name": "CSS",
+    "icon": "/skills/skill-icon-css.jpg"
+  },
+  {
+    "name": "HTML",
+    "icon": "/skills/skill-icon-html.jpg"
+  },
+  {
+    "name": "GraphQL",
+    "icon": "/skills/skill-icon-graphql.jpg"
+  },
+  {
+    "name": "REST",
+    "icon": "/skills/skill-icon-rest.jpg"
+  },
+  {
+    "name": "Apollo GraphQL",
+    "icon": "/skills/skill-icon-apollographql.jpg"
+  },
+  {
+    "name": "Redux",
+    "icon": "/skills/skill-icon-redux.jpg"
+  },
+  {
+    "name": "Gatsby",
+    "icon": "/skills/skill-icon-gatsby.jpg"
+  },
+  {
+    "name": "Express.js",
+    "icon": "/skills/skill-icon-expressjs.jpg"
+  },
+  {
+    "name": "Socket.IO",
+    "icon": "/skills/skill-icon-socketio.jpg"
+  },
+  {
+    "name": "Vue.js",
+    "icon": "/skills/skill-icon-vuejs.jpg"
+  },
+  {
+    "name": "Microsoft SQL Server",
+    "icon": "/skills/skill-icon-mssql.jpg"
+  },
+  {
+    "name": "PostgreSQL",
+    "icon": "/skills/skill-icon-postgresql.jpg"
+  },
+  {
+    "name": "Git",
+    "icon": "/skills/skill-icon-git.jpg"
+  },
+  {
+    "name": "GitHub",
+    "icon": "/skills/skill-icon-github.jpg"
+  },
+  {
+    "name": "Azure DevOps",
+    "icon": "/skills/skill-icon-azuredevops.jpg"
+  },
+  {
+    "name": "npm",
+    "icon": "/skills/skill-icon-npm.jpg"
+  },
+  {
+    "name": "Agile Development",
+    "icon": "/skills/skill-icon-agiledevelopment.jpg"
+  }
+]

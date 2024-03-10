@@ -1,0 +1,463 @@
+---
+title: 'Creating a TypeScript Package with Vite'
+description: 'How to create and publish a Typescript library by using Vite Library Mode'
+publishedAt: '2022-10-22'
+heroCaption: 'Photo by <a href="https://unsplash.com/@fempreneurstyledstock?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Leone Venter</a> on <a href="https://unsplash.com/s/photos/package?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
+---
+
+Sometimes, we have some utility functions or some complex stuff that we need to use in multiple projects and we don't want to copy it to each and every project. Or sometimes we just want to contribute to open-source community to both improve ourselves and help others.
+
+There are a lot of different ways of creating a TypeScript package. And here is a simple tutorial to make it happen by using [Vite](https://vitejs.dev/).
+
+We are gonna create a simple utility package with a couple of functions. And it can be used both for frontend and backend.
+
+**Note:** Here are the package versions used in this tutorial. When a new version is published, some of these may have breaking changes, change of best practices, have new options/usages etc. It is **always** nice to check the original documentation of the tools we are using every now and then.
+
+```text
+"@types/node": "^18.14.0",
+"typescript": "^4.9.3",
+"vite": "^4.1.0",
+"vite-plugin-dts": "^1.7.3"
+```
+
+For testing with Jest:
+
+```text
+"@types/jest": "^29.4.0",
+"jest": "^29.4.3",
+"ts-jest": "^29.0.5",
+```
+
+For testing with Vitest:
+
+```text
+"vitest": "^0.28.5"
+```
+
+## Scaffolding the Project
+
+First of all, we need to [create a new Vite project](https://vitejs.dev/guide/#scaffolding-your-first-vite-project). To accomplish this, we can run the following command:
+
+```bash
+npm create vite@latest
+```
+
+It will ask us some questions to create our project. We can set them like below:
+
+```text
+Project name: my-ts-lib
+Select a framework: Vanilla
+Select a variant: TypeScript
+```
+
+It will have a folder structure like this:
+
+```text
+📦my-ts-lib
+ ┣ 📂public
+ ┃ ┗ 📜vite.svg
+ ┣ 📂src
+ ┃ ┣ 📜counter.ts
+ ┃ ┣ 📜main.ts
+ ┃ ┣ 📜style.css
+ ┃ ┣ 📜typescript.svg
+ ┃ ┗ 📜vite-env.d.ts
+ ┣ 📜.gitignore
+ ┣ 📜index.html
+ ┣ 📜package.json
+ ┗ 📜tsconfig.json
+```
+
+We can delete `index.html`, `public` folder and all the files in `src`. In the end, it will look this this:
+
+```text
+📦my-ts-lib
+ ┣ 📂src
+ ┣ 📜.gitignore
+ ┣ 📜package.json
+ ┗ 📜tsconfig.json
+```
+
+Now, install the dependencies by using:
+
+```bash
+npm install
+```
+
+## Implementing the Features
+
+Now, we can implement our utility functions and create a simple folder structure.
+
+```ts title="src/sum.ts"
+function sum(a: number, b: number) {
+  return a + b;
+}
+
+export default sum;
+```
+
+```ts title="src/subtract.ts"
+function subtract(a: number, b: number) {
+  return a - b;
+}
+
+export default subtract;
+```
+
+```ts title="src/index.ts"
+export { default as sum } from './sum';
+export { default as subtract } from './subtract';
+```
+
+The key point here is, exporting all the functions, constants, enums, types etc. by using `index.ts` file. We are gonna point to it (actually, the output based on it) in our `package.json` in the following steps. So, we can say that, this is the place where we describe all the things we expose to the outside world and let other developers to be able to use this package.
+
+There can be multiple entry points for a package, but this is not a topic of this tutorial. For this, we can check [Vite Library Mode documentation](https://vitejs.dev/guide/build.html#library-mode).
+
+**Note:** We could create a single `index.ts` file and put all our code in it. But we just created multiple files to see how it affects the structure. The topics like the folder structure and how we export our functions (named or default export etc.) are completely up to us. We can sort out how to structure the project as it grows. There are also some recommended approaches which are worth for checking.
+
+## Bundling the Package
+
+To create the distributable package to publish on [npm](https://www.npmjs.com/), we need to create a `vite.config.ts` at the root of the project first. But before that, we need to install a couple more dependencies to get ready.
+
+Since we are gonna use some Node.js modules like `path`, we need no install `@types/node`. And to be able to include our type definitions as `.d.ts` files to our bundle, we need `vite-plugin-dts`.
+
+We need these packages only for local development or testing our package. So we put them in our `devDependencies` by `--save-dev` or `-D` flag. For more information about `dependencies`, `devDependencies` and `peerDependencies`, we can check [npm Docs](https://docs.npmjs.com/specifying-dependencies-and-devdependencies-in-a-package-json-file).
+
+```bash
+npm install -D @types/node vite-plugin-dts
+```
+
+```ts title="vite.config.ts"
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+
+// https://vitejs.dev/guide/build.html#library-mode
+export default defineConfig({
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'my-lib',
+      fileName: 'my-lib',
+    },
+  },
+  plugins: [dts()],
+});
+```
+
+And we need to add the entry points of our package to `package.json`. We also need to remove `private` field from it, if there is one.
+
+```json title="package.json" {5-13}
+{
+  "name": "my-ts-lib",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
+    }
+  }
+  // ...
+}
+```
+
+Basically, we are pointing out the root of our package and where the types are (by `type` field). Even if it's not the full explanation, we can basically think that when someone uses our package by using `import ... from 'my-ts-lib'` and if it runs in an environment which supports `ECMAScript modules (ESM)`, more modern `ESM` version of our code will be used. Otherwise, if someone uses our package by using `require('my-ts-lib')`, it will use the `CommonJS (CJS)` version.
+
+Now, we are ready to build our package and see the first result. Let's run the build command:
+
+```bash
+npm run build
+```
+
+It will create a `dist` folder at the root of our project and it will look like this:
+
+```text
+📦dist
+ ┣ 📜index.d.ts
+ ┣ 📜my-lib.js
+ ┣ 📜my-lib.umd.cjs
+ ┣ 📜subtract.d.ts
+ ┗ 📜sum.d.ts
+```
+
+It looks fine for now. But we need to add a couple of more stuff before publishing it to `npm`.
+
+First of all, we need a `README.md` file to inform other developers about how to use this package, showing examples etc. It will be shown on the page of our package on `npm`.
+
+We will create the `README.md` file at the root of the project. It can have any type of information we want.
+
+```md title="README.md"
+# my-ts-lib
+
+This is a package created to practice building a TypeScript package with Vite.
+```
+
+We also need to create a `LICENSE` file too. We can check [licensing a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) docs of GitHub to have a little knowledge about it.
+
+And lastly, we need to add a `files` field to `package.json` to indicate npm what we want to be in the final package. We just need to point `dist` folder here. `README.md`, `LICENSE` and `package.json` will be automatically included. If we come across any problem, we can put them in this array too.
+
+```json title="package.json" {11-13}
+  // ...
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  // ...
+```
+
+And now, we can run the following command to preview what our package will look like without publishing it:
+
+```bash
+npm pack --dry-run
+```
+
+[npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack) command helps us to preview what our package will include and its size when we publish it. `--dry-run` is optional here. If we don't use it and just run `npm pack`, it will also create a `.tgz` file which is what would be deployed on npm. We are just previewing our package without publishing it, yet. We can use this command at anytime to preview our package.
+
+```bash
+npm notice 📦  my-ts-lib@0.0.0
+npm notice === Tarball Contents ===
+npm notice 1.1kB LICENSE
+npm notice 95B   README.md
+npm notice 90B   dist/index.d.ts
+npm notice 114B  dist/my-lib.js
+npm notice 392B  dist/my-lib.umd.cjs
+npm notice 82B   dist/subtract.d.ts
+npm notice 72B   dist/sum.d.ts
+npm notice 554B  package.json
+npm notice === Tarball Details ===
+npm notice name:          my-ts-lib
+npm notice version:       0.0.0
+npm notice filename:      my-ts-lib-0.0.0.tgz
+npm notice package size:  1.6 kB
+npm notice unpacked size: 2.5 kB
+npm notice total files:   8
+```
+
+We have `dist` folder, `README.md`, `LICENSE` and `package.json` in our package. Just like we want.
+
+## Versioning
+
+As we can see, our package version is `0.0.0` now. We might want to update our package version, especially as we add new features, make fixes or refactors. [Semantic Versioning](https://semver.org/) is a nice way to follow for this.
+We can use following commands to bump our package version:
+
+```bash
+npm version patch
+# Bumps the patch number like 0.0.0 -> 0.0.1
+
+npm version minor
+# Bumps the patch number like 0.0.x -> 0.1.0
+
+npm version major
+# Bumps the patch number like 0.x.y -> 1.0.0
+```
+
+We can also use `alpha` or `beta` versions. [npm version Docs](https://docs.npmjs.com/cli/v8/commands/npm-version) is a nice place to check out for it.
+
+## Setting Up Tests
+
+We may want to test our package to be sure if it's reliable and we're not breaking anything in time. To do that, we need to install some packages to be used for testing.
+
+We can use the good old [Jest](https://jestjs.io/) or [Vitest](https://vitest.dev/) for testing. It's up to you to choose the one you like.
+
+### Testing with Jest
+
+First, we need to install the packages required for testing.
+
+```bash
+npm install -D jest @types/jest ts-jest
+```
+
+And we need to create a `jest.config.js` file to configure Jest to test our `ts` files.
+
+```bash
+npx ts-jest config:init
+```
+
+Lastly, we need to add a `test` script to our `package.json`.
+
+```json title="package.json" {7}
+{
+  // ...
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "jest"
+  }
+  // ...
+}
+```
+
+Now, we can create our test files and see if our package works properly.
+
+```ts title="src/sum.test.ts"
+import sum from './sum';
+
+test('sums two numbers', () => {
+  expect(sum(4, 7)).toBe(11);
+});
+```
+
+```ts title="src/subtract.test.ts"
+import subtract from './subtract';
+
+test('subtracts two numbers', () => {
+  expect(subtract(10, 7)).toBe(3);
+});
+```
+
+Let's run our test and see if we're all good:
+
+```bash
+npm test
+```
+
+🎉🎉🎉
+
+```bash
+Test Suites: 2 passed, 2 total
+Tests:       2 passed, 2 total
+```
+
+### Testing with Vitest
+
+As the first step, we will install Vitest.
+
+```bash
+npm install -D vitest
+```
+
+Also, even if it's not required for this example, we can configure it in our `vite.config.ts`.
+
+```ts title="vite.config.ts" {1-2,18-20}
+/// <reference types="vitest" />
+// Configure Vitest (https://vitest.dev/config/)
+
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+
+// https://vitejs.dev/guide/build.html#library-mode
+export default defineConfig({
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'my-lib',
+      fileName: 'my-lib',
+    },
+  },
+  plugins: [dts()],
+  test: {
+    // ...
+  },
+});
+```
+
+We will add `test` script to `package.json`:
+
+```json title="package.json" {7}
+{
+  // ...
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  }
+  // ...
+}
+```
+
+Create our test files to be sure our package works properly:
+
+```ts title="src/sum.test.ts"
+import { test, expect } from 'vitest';
+import sum from './sum';
+
+test('sums two numbers', () => {
+  expect(sum(4, 7)).toBe(11);
+});
+```
+
+```ts title="src/subtract.test.ts"
+import { test, expect } from 'vitest';
+import subtract from './subtract';
+
+test('subtracts two numbers', () => {
+  expect(subtract(10, 7)).toBe(3);
+});
+```
+
+And we can run the tests to see if everything is fine.
+
+```bash
+npm test
+```
+
+🎉🎉🎉
+
+```bash
+Test Files  2 passed (2)
+     Tests  2 passed (2)
+```
+
+## Linting & Formatting
+
+We may want to lint our code for finding problems and format it to have a well structured project.
+
+To do this, a good way is using [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/).
+
+This tutorial will not be deep dive about how to set these up. Rules, plugins and configs may differ based on the project and team preferences. Like mentioned at the beginning, official docs of these kind of tools are the best places to check out.
+
+But as a couple of advices, a fast way of setting ESLint up is using the following command:
+
+```bash
+npx eslint --init
+```
+
+And if we want to use Prettier with it, [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier) and [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) are worth checking.
+
+Also, [Husky](https://typicode.github.io/husky/#/) and [lint-staged](https://github.com/okonet/lint-staged) are nice tools to have a more more strict and automated flow for linting and formatting.
+
+## Publishing the Package
+
+We are nearly there. We just need to add a couple of more fields to inform npm about our package.
+
+```json title="package.json" {3-14}
+{
+  // ...
+  "description": "This is a simple utility package",
+  "author": "<YOUR_NAME>",
+  "license": "MIT",
+  "homepage": "<YOUR_SITE_URL>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<YOUR_USER_NAME>/my-ts-lib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<YOUR_USER_NAME>/my-ts-lib/issues"
+  },
+  "keywords": ["some", "keywords", "to", "describe", "the", "package"]
+  // ...
+}
+```
+
+And finally, we use [npm publish](https://docs.npmjs.com/cli/v8/commands/npm-publish) command and publish our package to npm:
+
+```bash
+npm publish
+```
+
+Thanks for reading!

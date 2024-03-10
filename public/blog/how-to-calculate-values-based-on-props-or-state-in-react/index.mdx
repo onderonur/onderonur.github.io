@@ -1,0 +1,248 @@
+---
+title: 'How to Calculate Values Based on Props or State in React'
+description: 'When to and not to use useState with useEffect to dynamically calculate values based on props or state'
+publishedAt: '2022-05-01'
+heroCaption: 'Photo by <a href="https://unsplash.com/@jan_huber?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jan Huber</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
+---
+
+export const metadata = {
+  title: 'How to Calculate Values Based on Props or State in React',
+  description:
+    'When to and not to use useState with useEffect to dynamically calculate values based on props or state',
+};
+
+When we think about React and what it does, it all comes to creating a UI in a declarative way if we simplify it. When it comes to calculating dynamic values based on props or some state, there are some common mistakes done by both beginners and experienced developers. We are gonna talk about one of these.
+
+Let's think we have a component which renders a list of posts like:
+
+```js
+function PostList({ posts }) {
+  return (
+    <div>
+      <Title>Posts</Title>
+      <List>
+        {posts.map((post) => {
+          return (
+            <ListItem key={post.id}>
+              <PostAuthor author={post.author} />
+              <PostDate>{post.createdAt}</PostDate>
+              <PostBody>{post.body}</PostBody>
+              <Actions>
+                <LikeButton postId={post.id} likeCount={post.likeCount} />
+              </Actions>
+            </ListItem>
+          );
+        })}
+      </List>
+    </div>
+  );
+}
+```
+
+Nothing fancy here. Just a simple component which composes different sub-components to render a post list.
+
+Now let's think that, we need to show the total like count of all of the posts right under the title. We have the `posts` array and each post has a `likeCount`. Obviously, we need the summary of these fields and change that total value as `posts` array is changed. We can use any method (e.g., `Array.forEach`, `Array.reduce`, plain `for` loop etc.) to iterate `posts` array to get the total like count. Let's keep it simple and clear. So we can do something like this:
+
+```js {1-10,13-20}
+// We can put this function in `PostList` component to make it directly access `posts` prop and use `useCallback`.
+// But this is not the case here, and let's just keep things simple.
+// We just have a function to calculate total like count.
+function getTotalLikeCount(posts) {
+  let totalLikeCount = 0;
+  posts.forEach((post) => {
+    totalLikeCount = totalLikeCount + post.likeCount;
+  });
+  return totalLikeCount;
+}
+
+function PostList({ posts }) {
+  const [totalLikeCount, setTotalLikeCount] = useState(
+    getTotalLikeCount(posts),
+  );
+
+  useEffect(() => {
+    const newTotalLikeCount = getTotalLikeCount(posts);
+    setTotalLikeCount(newTotalLikeCount);
+  }, [posts]);
+
+  return (
+    <div>
+      <Title>Posts</Title>
+      <Subtitle>Total Likes: {totalLikeCount}</Subtitle>
+      <List>
+        {posts.map((post) => {
+          return (
+            <ListItem key={post.id}>
+              <PostAuthor author={post.author} />
+              <PostDate>{post.createdAt}</PostDate>
+              <PostBody>{post.body}</PostBody>
+              <Actions>
+                <LikeButton postId={post.id} likeCount={post.likeCount} />
+              </Actions>
+            </ListItem>
+          );
+        })}
+      </List>
+    </div>
+  );
+}
+```
+
+This will work as expected. We are updating `totalLikeCount` state as `posts` array is changed and it also looks very simple. So, everything should be OK, right? But actually, we did something "wrong" here. As you can see, we created a new state called `totalLikeCount` to update the UI as `posts` array is changed to show the current total like count.
+
+`totalLikeCount` is directly calculated based on a prop, which is `posts`. We can calculate it dynamically without creating a new state. We don't need to update `totalLikeCount` to re-render the UI. It will already re-render when `posts` is changed. We don't need to do anything imperative like this to make React to re-render this component.
+
+This kind of `useState` + `useEffect` usage is a very common mistake. I guess, we just forget that React is based on declarative approaches and think we need to make some sort of a state update to make it re-render the components. Using `useState` + `useEffect` will end up creating a flow like:
+
+- `posts` prop is changed.
+- `PostList` component gets re-rendered.
+- `useEffect` gets triggered and calls `setTotalLikeCount`.
+- Since a state is changed (assuming `newTotalLikeCount` is different than the current `totalLikeCount`), component gets re-rendered again.
+
+So, it ended up creating an unnecessary re-render and we got an unnecessary flow. You may even see some sort of a flickering for the `Subtitle` component content and try to use `useLayoutEffect`, but it's not the right solution here.
+
+We can apply different solutions based on our requirements.
+
+## Improvement 1 - Updating State During Render
+
+As we mentioned, when `posts` prop is changed `PostList` components gets re-rendered and after the rendering process is finished, `useEffect` gets triggered. Because we called `setTotalLikeCount` in that `useEffect`, if we set a value different than the current `totalLikeCount`, `PostList` will be re-rendered again.
+
+So, instead of waiting for the first render to be done and updating `totalLikeCount` after that, we can update it during the first rendering process.
+
+Updating a state during render seems a little bad at first. But it's basically what `getDerivedStateFromProps` was doing in class components. You can check [the official React docs](https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops) to understand it better.
+
+We can simply do:
+
+```js {13-18}
+function getTotalLikeCount(posts) {
+  let totalLikeCount = 0;
+  posts.forEach((post) => {
+    totalLikeCount = totalLikeCount + post.likeCount;
+  });
+  return totalLikeCount;
+}
+
+function PostList({ posts }) {
+  const [totalLikeCount, setTotalLikeCount] = useState(
+    getTotalLikeCount(posts),
+  );
+  const [prevPosts, setPrevPosts] = useState(posts);
+
+  if (posts !== prevPosts) {
+    setPrevPosts(posts);
+    setTotalLikeCount(getTotalLikeCount(posts));
+  }
+
+  return (
+    <div>
+      <Title>Posts</Title>
+      <Subtitle>Total Likes: {totalLikeCount}</Subtitle>
+      <List>
+        {posts.map((post) => {
+          return (
+            <ListItem key={post.id}>
+              <PostAuthor author={post.author} />
+              <PostDate>{post.createdAt}</PostDate>
+              <PostBody>{post.body}</PostBody>
+              <Actions>
+                <LikeButton postId={post.id} likeCount={post.likeCount} />
+              </Actions>
+            </ListItem>
+          );
+        })}
+      </List>
+    </div>
+  );
+}
+```
+
+By using this technique, we simply made a little performance optimization and told React to exit the current rendering process if `posts` is changed during that render and start a new render with updated `totalLikeCount`. We can even create a `useDerivedState` hook if we need to use this approach in multiple places. But should we use this approach all the time?
+
+We still have an unnecessary flow here. Even if we exit the first render, we still set `totalLikeCount` as a state of `PostList` component. This kind of an approach may be valuable for cases like creating a form component. If we want to derive some default/initial values based on props (or other state) and be able to update those values with some user interaction etc. (a common case for form components), this could be what we use. But even in that case, there are better alternatives like using a `key` on the form component. We will not deep-dive into it in this article but using a simple `key` and telling React to throw the current component into thrash as that `key` changes and create a new one is a very simple, maintainable and performant way instead of manually resetting states of that component in many cases. You can read about this in [here](https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html) and see if you really need to use derived state.
+
+## Improvement 2 - Not Using State at All
+
+In our case `totalLikeCount` is a read-only value. We don't have a case to update it manually. Even if we would want to use techniques like optimistic UI, we would do it directly on `posts` array based on the approach we use to get it (Context API, Redux, React Query, SWR, Apollo etc.). `totalLikeCount` is a value, which should be derived from `posts`. Just because it should be derived from some prop (or state), we should not make it a state if we don't need it really.
+
+So we can simply calculate it in the render scope like:
+
+```js {10-11}
+function getTotalLikeCount(posts) {
+  let totalLikeCount = 0;
+  posts.forEach((post) => {
+    totalLikeCount = totalLikeCount + post.likeCount;
+  });
+  return totalLikeCount;
+}
+
+function PostList({ posts }) {
+  // No useState, no useEffect, just a dynamically calculated value.
+  const totalLikeCount = getTotalLikeCount(posts);
+
+  return (
+    <div>
+      <Title>Posts</Title>
+      <Subtitle>Total Likes: {totalLikeCount}</Subtitle>
+      <List>
+        {posts.map((post) => {
+          return (
+            <ListItem key={post.id}>
+              <PostAuthor author={post.author} />
+              <PostDate>{post.createdAt}</PostDate>
+              <PostBody>{post.body}</PostBody>
+              <Actions>
+                <LikeButton postId={post.id} likeCount={post.likeCount} />
+              </Actions>
+            </ListItem>
+          );
+        })}
+      </List>
+    </div>
+  );
+}
+```
+
+We just calculate `totalLikeCount` in the render scope dynamically. We have access to `posts` prop and component gets re-rendered when `posts` prop is changed. So, why shouldn't we? We don't need to use any `useState`, `useEffect` or create a flow for deriving state here. We created a simpler code, prevented an unnecessary re-renders and just used what we need.
+
+If there are a lot of items in the `posts` array and calculating `totalLikeCount` is time consuming, we can simply use `useMemo` as a performance optimization like:
+
+```js {10-12}
+function getTotalLikeCount(posts) {
+  let totalLikeCount = 0;
+  posts.forEach((post) => {
+    totalLikeCount = totalLikeCount + post.likeCount;
+  });
+  return totalLikeCount;
+}
+
+function PostList({ posts }) {
+  const totalLikeCount = useMemo(() => {
+    return getTotalLikeCount(posts);
+  }, [posts]);
+
+  return (
+    <div>
+      <Title>Posts</Title>
+      <Subtitle>Total Likes: {totalLikeCount}</Subtitle>
+      <List>
+        {posts.map((post) => {
+          return (
+            <ListItem key={post.id}>
+              <PostAuthor author={post.author} />
+              <PostDate>{post.createdAt}</PostDate>
+              <PostBody>{post.body}</PostBody>
+              <Actions>
+                <LikeButton postId={post.id} likeCount={post.likeCount} />
+              </Actions>
+            </ListItem>
+          );
+        })}
+      </List>
+    </div>
+  );
+}
+```
+
+In summary, we need to check our requirements and use cases when we want to calculate/derive something based on props or some state and think about if we really need to make it a new state. We can use different approaches based on what we are gonna do with that derived value and how it should behave. In the end, you will see you have a much cleaner architecture and it will be much easier to maintain it in the long term.
+
+Thanks for reading!

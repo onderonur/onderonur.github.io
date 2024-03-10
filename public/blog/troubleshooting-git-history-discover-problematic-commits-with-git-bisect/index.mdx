@@ -1,0 +1,185 @@
+---
+title: 'Troubleshooting Git History: Discover Problematic Commits with git bisect'
+description: 'Discover the power of git bisect for pinpointing issue-introducing commits'
+publishedAt: '2024-03-23 13:30'
+heroCaption:
+  'Photo by <a href="https://unsplash.com/@aznbokchoy?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Lucas K</a> on <a href="https://unsplash.com/photos/blue-and-orange-smoke-wQLAGv4_OYs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  '
+---
+
+Let's think that we are working on a giant project. Everyday lots of pull requests are merged to the repository. New features, bug fixes, improvements. Everything goes well.
+
+We have unit tests, integration tests, e2e tests, code reviews, CI pipelines to check the code quality and possible issues, QA processes and all.
+
+But every now and then, things can break apart. A new issue can be introduced without us even noticing.
+
+And now we have a `production` bug, have no idea what caused it and we want to be able to find the root cause as soon as possible to either fix it or to roll it back.
+
+We can jump right into code and try to find out the root cause, check the recently merged pull requests, ask teammates if anyone worked on that part of the project etc.
+
+But there is actually a very easy way of finding out the commit which introduced the issue.
+
+## Enter `git bisect`
+
+`git` is an incredibly powerful tool when it comes to version control. It has many commands and most of the times knowing only a handful of those is all enough.
+
+And `git bisect` is definitely one of them.
+
+Simply, if we know a point in the `git` history where the issue was not there, [`git bisect`](https://git-scm.com/docs/git-bisect) can be used to search the history to find the problematic commit by using a [binary search algorithm](https://en.wikipedia.org/wiki/Binary_search_algorithm).
+
+We just point a good (a commit in the history without the issue) and a bad (a commit in the history with the issue) and let `git bisect` to help us find the root cause.
+
+## Example
+
+Let's say we have the following `git` history.
+
+```bash
+git log --oneline
+
+# 6fcc7d6 (HEAD -> main) feature k 👈 This is the most recent commit. Now we are here and the issue can be seen.
+# 89ce8c4 feature j
+# fab7502 feature i
+# bd379bc feature h
+# 5b700cb feature g
+# 730a72b feature f
+# 837940d feature e
+# 5620c68 feature d
+# 24184b1 feature c 👈 We know the issue was not there up until this commit.
+# a73f9ea feature b
+# 1edbc54 feature a
+# ...
+```
+
+We know that the issue was not there up until `24184b1` commit, which has the message `feature c`. So, this is the last "good" point in the history that we know without the issue.
+
+We don't know when the issue was introduced. So we will choose the latest commit as the "bad" point here.
+
+We run the following command to start the bisect process.
+
+```bash
+git bisect start
+
+# status: waiting for both good and bad commits
+```
+
+Now, `git bisect` wants us to enter a good and a bad commit. Let's set the most recent commit as the "bad" one.
+
+```bash
+git bisect bad 6fcc7d6
+
+# status: waiting for good commit(s), bad commit known
+```
+
+And set `feature c` commit as the "good" one.
+
+```bash
+git bisect good 24184b1
+
+# Bisecting: 3 revisions left to test after this (roughly 2 steps)
+# [5b700cba53acbbbae077f8365f72c3b232c189b8] feature g 👈 Switched to `feature g` commit.
+```
+
+We switched to the `feature g` commit which is right in the middle of `feature c` (good) and `feature k` (bad) commits. So, the binary search algorithm started as we can see.
+
+And at every step, `git bisect` tells us how many possible steps remained to find the problematic commit.
+
+```bash
+# 6fcc7d6 feature k 🐞 Bad.
+# 89ce8c4 feature j
+# fab7502 feature i
+# bd379bc feature h
+# 5b700cb feature g 👀 We're checking this commit.
+# 730a72b feature f
+# 837940d feature e
+# 5620c68 feature d
+# 24184b1 feature c ✅ Good.
+# a73f9ea feature b
+# 1edbc54 feature a
+# ...
+```
+
+We will run the project in our local environment, check if the issue is there or not.
+
+Let's say the issue is not there. So, we can mark `feature g` as a good commit.
+
+```bash
+git bisect good
+
+# Bisecting: 1 revision left to test after this (roughly 1 step)
+# [fab7502317e68a72cba6c9f97f3bf4f9b8a197bf] feature i 👈 Switched to `feature g` commit.
+```
+
+Now we switched to `feature i` commit, which is in the middle of `feature g` (good) and `feature k` (bad) commits.
+
+```bash
+# 6fcc7d6 feature k 🐞 Bad.
+# 89ce8c4 feature j
+# fab7502 feature i 👀 We'll checking this commit now.
+# bd379bc feature h
+# 5b700cb feature g ✅ Good.
+# 730a72b feature f
+# 837940d feature e
+# 5620c68 feature d
+# 24184b1 feature c
+# a73f9ea feature b
+# 1edbc54 feature a
+# ...
+```
+
+Once again, let's run the project and check if the issue is there or not.
+
+Let's say the issue is there. So, we mark `feature i` as a bad commit.
+
+```bash
+git bisect bad
+
+# Bisecting: 0 revisions left to test after this (roughly 0 steps)
+# [bd379bc8e09d6a9b5cc1bef3c988cc64bc90be65] feature h 👈 Switched to `feature h` commit.
+```
+
+We are getting close. We switched to `feature h` commit now.
+
+```bash
+# 6fcc7d6 feature k
+# 89ce8c4 feature j
+# fab7502 feature i 🐞 Bad.
+# bd379bc feature h 👀 We'll checking this commit now.
+# 5b700cb feature g ✅ Good.
+# 730a72b feature f
+# 837940d feature e
+# 5620c68 feature d
+# 24184b1 feature c
+# a73f9ea feature b
+# 1edbc54 feature a
+# ...
+```
+
+Lastly, we run the project, check if the issue is there and let's say it is there.
+
+So, we will mark `feature h` commit as a bad one.
+
+```bash
+git bisect bad
+
+# bd379bc8e09d6a9b5cc1bef3c988cc64bc90be65 is the first bad commit 🚀 We found it.
+```
+
+Now we know the issue was first introduced with `feature h` commit.
+
+We can check the file changes it introduced and easily find the root cause of the issue.
+
+Lastly, we can run the following command to finish `git bisect`.
+
+```bash
+git bisect reset
+```
+
+## Conclusion
+
+As we know, binary search can work on sorted lists and `git bisect` uses it in a way. So, we might consider having a linear `git` history. It is not a 100% requirement for `git bisect`, but it is most effective and straightforward to use on a linear history. And one of the easiest way of doing this is using squash merges for pull requests.
+
+It is out of the scope of this article, but configuring it is generally easy. We just need to check the documentation of the "tool" we are using for `git` (GitHub, GitLab, Bitbucket etc.). Having a linear `git` history makes it easy to see the progress of the project and find out issues.
+
+And we don't need to wait for a `production` issue to try `git bisect`, of course. If we encounter problems between multiple commits while working on a branch, `git bisect` can be a valuable tool for improving the efficiency of the debugging process and easily pinpointing the root cause.
+
+Thanks for reading!

@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://onderonur.github.io",
+  "title": "Onur Önder",
+  "titleTemplate": "%s | Onur Önder",
+  "description": "Onur Önder's personal website and blog about software development. Built with Next.js.",
+  "image": "/site/image.jpg",
+  "googleSiteVerification": "rwRJ1WnAo5ydYvkeWYGaRiohfB6D90TgielWupCdi5Y"
+}

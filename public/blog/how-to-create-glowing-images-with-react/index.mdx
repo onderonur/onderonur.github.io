@@ -1,0 +1,323 @@
+---
+title: 'How to Create Glowing Images with React'
+description: 'Creating glowing images with React'
+publishedAt: '2022-04-18 22:00'
+heroCaption: 'Photo by <a href="https://unsplash.com/@nervum?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jack B</a> on <a href="https://unsplash.com/s/photos/glow?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>'
+---
+
+First of all, even though this tutorial is based on React, you can apply the same technique with any library/framework or just HTML and CSS.
+
+## Preparing the Template
+
+Let's run the following command to create a new React app by using Vite.
+
+```bash
+npm create vite@latest
+```
+
+```text
+Project name: glowing-image-demo
+Select a framework: React
+Select a variant: TypeScript
+```
+
+After the installation is done and our project is created, we can open it and install our dependencies.
+
+```bash
+npm install
+```
+
+We will delete `assets` folder in `src` since we don't need it, apply some global styles to override the default browser stylings and a dark background to make the glow effect more visible.
+
+```css title="src/index.css"
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0.8rem;
+  background-color: #19222d;
+}
+```
+
+Now, our template is ready and we can start creating our glowing images!
+
+## Glowing Images
+
+Let's start creating `GlowingImage` component to render our images.
+
+```css title="src/GlowingImage.css"
+.glowing-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+```
+
+```tsx title="src/GlowingImage.tsx"
+import './GlowingImage.css';
+
+type GlowingImageProps = Pick<
+  React.ComponentPropsWithoutRef<'img'>,
+  'src' | 'alt' | 'width' | 'height'
+>;
+
+export default function GlowingImage(props: GlowingImageProps) {
+  return (
+    <div className="glowing-image-root">
+      <img className="glowing-image" {...props} />
+    </div>
+  );
+}
+```
+
+We will use [Picsum](https://picsum.photos/) to display random images.
+
+Let's display the image by centering it horizontally in our app.
+
+```css title="src/App.css"
+.main-content {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+```
+
+```tsx title="src/App.tsx"
+import './App.css';
+import GlowingImage from './GlowingImage';
+
+export default function App() {
+  return (
+    <main className="main-content">
+      <GlowingImage
+        src="https://picsum.photos/230/345?random=0"
+        alt="Glowing Image"
+        width={230}
+        height={345}
+      />
+    </main>
+  );
+}
+```
+
+It should look like this now:
+
+<Showcase>
+  <GlowingImage01 />
+</Showcase>
+
+Now we need to add the glow effect. As you can guess, we will use `glowing-image-root` to add the stylings.
+
+We will create a pseudo element by using `::before` and set its background image as same as our image. By doing this, we will have two layers of the same image on top of each other.
+
+To be able to share the image URL between the component and CSS, we use custom properties (CSS variables).
+
+We also set `border-radius` and make `<img>` to inherit it to have a little rounded image.
+
+```css title="src/GlowingImage.css" {1-15,21}
+.glowing-image-root {
+  position: relative;
+  border-radius: 0.6rem;
+}
+
+.glowing-image-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: --var(img-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: inherit;
+}
+
+.glowing-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  z-index: 1;
+}
+```
+
+```tsx title="src/GlowingImage.tsx" {12-16}
+import './GlowingImage.css';
+
+type GlowingImageProps = Pick<
+  React.ComponentPropsWithoutRef<'img'>,
+  'src' | 'alt' | 'width' | 'height'
+>;
+
+export default function GlowingImage(props: GlowingImageProps) {
+  return (
+    <div
+      className="glowing-image-root"
+      style={
+        {
+          '--img-url': `url(${props.src})`,
+        } as React.CSSProperties
+      }
+    >
+      <img className="glowing-image" {...props} />
+    </div>
+  );
+}
+```
+
+Now, we can apply stylings to the background image, without affecting the original one.
+
+To imitate a glow effect, we will add some blur to the background image and give it a little saturation to make its colors sharper.
+
+```css title="src/GlowingImage.css" {17}
+.glowing-image-root {
+  position: relative;
+  border-radius: 0.6rem;
+}
+
+.glowing-image-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--img-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  border-radius: inherit;
+  /* You can change these values until it looks fine to you */
+  filter: blur(0.6rem) saturate(2);
+}
+
+.glowing-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+```
+
+We have a subtle glow now!
+
+<Showcase>
+  <GlowingImage02 />
+</Showcase>
+
+To make it more visible, we can apply some scaling too. We can make the background image bigger by scaling it up, but I prefer making the original image slightly smaller like:
+
+```css title="src/GlowingImage.css" {24}
+.glowing-image-root {
+  position: relative;
+  border-radius: 0.6rem;
+}
+
+.glowing-image-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--img-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  border-radius: inherit;
+  /* You can change these values until it looks fine to you */
+  filter: blur(0.6rem) saturate(2);
+}
+
+.glowing-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transform: scale(0.98);
+}
+```
+
+And it's done!
+
+<Showcase>
+  <GlowingImage03 />
+</Showcase>
+
+To better understand this technique, we can make the original image non-visible **temporarily** and reveal our glowing image trick like:
+
+```css title="src/GlowingImage.css" {25}
+.glowing-image-root {
+  position: relative;
+  border-radius: 0.6rem;
+}
+
+.glowing-image-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--img-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  border-radius: inherit;
+  /* You can change these values until it looks fine to you */
+  filter: blur(0.6rem) saturate(2);
+}
+
+.glowing-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transform: scale(0.98);
+  opacity: 0;
+}
+```
+
+If you want, you can also add some hover animation to the glow effect like:
+
+```css title="src/GlowingImage.css" {20-32}
+.glowing-image-root {
+  position: relative;
+  border-radius: 0.6rem;
+}
+
+.glowing-image-root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--img-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* z-index: -1; */
+  border-radius: inherit;
+  /* You can change these values until it looks fine to you */
+  filter: blur(0.6rem) saturate(2);
+}
+
+@keyframes glow {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0.98);
+  }
+}
+
+.glowing-image-root:hover::before {
+  animation: glow 500ms ease-in-out alternate infinite;
+}
+
+.glowing-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transform: scale(0.98);
+}
+```
+
+Hover the image to see the effect!
+
+<Showcase>
+  <GlowingImage04 />
+</Showcase>
+
+Thanks for reading!

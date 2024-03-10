@@ -1,0 +1,403 @@
+[
+  {
+    "title": "Web Apps",
+    "items": [
+      {
+        "title": "next-shopper",
+        "description": "A simple e-commerce web application built with Next.js",
+        "image": "/projects/next-shopper.jpg",
+        "demoUrl": "https://next-shopper.vercel.app/",
+        "sourceCodeUrl": "https://github.com/onderonur/next-shopper",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Next.js"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "Tailwind CSS"
+          }
+        ]
+      },
+      {
+        "title": "onurl",
+        "description": "URL Shortener created with Next.js, TypeScript & MongoDB",
+        "image": "/projects/onurl.jpg",
+        "demoUrl": "https://onurl.vercel.app/",
+        "sourceCodeUrl": "https://github.com/onderonur/onurl",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Next.js"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "Prisma"
+          },
+          {
+            "name": "MongoDB"
+          }
+        ]
+      },
+      {
+        "title": "rickql",
+        "description": "Client app for Rick and Morty API with TypeScript, Next.js, React & Apollo GraphQL",
+        "image": "/projects/rickql.jpg",
+        "demoUrl": "https://rick-and-morty-graphql.vercel.app/",
+        "sourceCodeUrl": "https://github.com/onderonur/rick-and-morty-graphql",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Next.js"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "Apollo GraphQL"
+          }
+        ]
+      },
+      {
+        "title": "tmdb-explorer",
+        "description": "A TMDb Explorer Application Created with Next.js",
+        "image": "/projects/tmdb-explorer.jpg",
+        "demoUrl": "https://tmdb-explorer.vercel.app/",
+        "sourceCodeUrl": "https://github.com/onderonur/tmdb-explorer",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Next.js"
+          },
+          {
+            "name": "React"
+          }
+        ]
+      },
+      {
+        "title": "remix-shows",
+        "description": "TV Show guide built with Remix",
+        "image": "/projects/remix-shows.jpg",
+        "sourceCodeUrl": "https://github.com/onderonur/remix-shows",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Remix"
+          },
+          {
+            "name": "React"
+          }
+        ]
+      },
+      {
+        "title": "code-image-generator",
+        "description": "Create your code images by choosing different themes and visual settings.",
+        "image": "/projects/code-image-generator.jpg",
+        "demoUrl": "https://onderonur.github.io/code-image-generator/",
+        "sourceCodeUrl": "https://github.com/onderonur/code-image-generator",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Next.js"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "Tailwind CSS"
+          }
+        ]
+      },
+      {
+        "title": "onderonur.github.io",
+        "description": "Personal website & blog. Built with Next.js.",
+        "image": "/projects/onderonur.github.io.jpg",
+        "demoUrl": "https://onderonur.github.io/",
+        "sourceCodeUrl": "https://github.com/onderonur/onderonur.github.io",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Next.js"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "MDX"
+          }
+        ]
+      },
+      {
+        "title": "gatsby-onderonur-blog",
+        "description": "Personal website & blog. Built with Gatsby and Netlify CMS.",
+        "image": "/projects/gatsby-onderonur-blog.jpg",
+        "sourceCodeUrl": "https://github.com/onderonur/gatsby-onderonur-blog",
+        "techStack": [
+          {
+            "name": "JavaScript"
+          },
+          {
+            "name": "Gatsby"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "Netlify CMS"
+          }
+        ]
+      },
+      {
+        "title": "post-gallery",
+        "description": "Full stack GraphQL web application that implements basic features of 9GAG.",
+        "image": "/projects/post-gallery.jpg",
+        "sourceCodeUrl": "https://github.com/onderonur/post-gallery",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Next.js"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "Apollo GraphQL"
+          },
+          {
+            "name": "PostgreSQL"
+          }
+        ]
+      },
+      {
+        "title": "bubbly",
+        "description": "Full stack chat application created with Socket.IO, React, TypeScript, Next.js and Express",
+        "image": "/projects/bubbly.jpg",
+        "sourceCodeUrl": "https://github.com/onderonur/bubbly",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Next.js"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "Express.js"
+          },
+          {
+            "name": "Socket.IO"
+          }
+        ]
+      },
+      {
+        "title": "bubbly-flask",
+        "description": "Clone of my own project \"bubbly\", with a python (flask) API created with flask-socketio",
+        "image": "/projects/bubbly.jpg",
+        "sourceCodeUrl": "https://github.com/onderonur/bubbly-flask",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "Python"
+          },
+          {
+            "name": "Flask"
+          },
+          {
+            "name": "Socket.IO"
+          }
+        ]
+      },
+      {
+        "title": "nuxt-heroes-and-villains",
+        "description": "A small web app to list various characters from comics, movies, etc.",
+        "image": "/projects/nuxt-heroes-and-villains.jpg",
+        "demoUrl": "https://onderonur.github.io/nuxt-heroes-and-villains/",
+        "sourceCodeUrl": "https://github.com/onderonur/nuxt-heroes-and-villains",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Nuxt.js"
+          },
+          {
+            "name": "Vue.js"
+          },
+          {
+            "name": "Tailwind CSS"
+          }
+        ]
+      },
+      {
+        "title": "svelte-github-explorer",
+        "description": "A simple Svelte app to explore users and their repositories on GitHub",
+        "image": "/projects/svelte-github-explorer.jpg",
+        "demoUrl": "https://onderonur.github.io/svelte-github-explorer/",
+        "sourceCodeUrl": "https://github.com/onderonur/svelte-github-explorer",
+        "techStack": [
+          {
+            "name": "SvelteKit"
+          },
+          {
+            "name": "Svelte"
+          }
+        ]
+      },
+      {
+        "title": "drag-and-drop-taskboard",
+        "description": "Taskboard with drag'n drop feature. Built with React, TypeScript",
+        "image": "/projects/drag-and-drop-taskboard.jpg",
+        "sourceCodeUrl": "https://github.com/onderonur/drag-and-drop-taskboard",
+        "demoUrl": "https://onderonur.github.io/drag-and-drop-taskboard/",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "React"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "npm Packages",
+    "items": [
+      {
+        "title": "react-infinite-scroll-hook",
+        "description": "A simple hook to create infinite scroll list components",
+        "image": "/projects/npm.jpg",
+        "demoUrl": "https://onderonur.github.io/react-infinite-scroll-hook/",
+        "sourceCodeUrl": "https://github.com/onderonur/react-infinite-scroll-hook",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "TSDX"
+          }
+        ]
+      },
+      {
+        "title": "react-intersection-observer-hook",
+        "description": "React hook to use IntersectionObserver declaratively",
+        "image": "/projects/npm.jpg",
+        "demoUrl": "https://onderonur.github.io/react-intersection-observer-hook/",
+        "sourceCodeUrl": "https://github.com/onderonur/react-intersection-observer-hook",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "React"
+          },
+          {
+            "name": "TSDX"
+          }
+        ]
+      },
+      {
+        "title": "go-try",
+        "description": "Easy and flattened error handling for sync and async functions",
+        "image": "/projects/npm.jpg",
+        "sourceCodeUrl": "https://github.com/onderonur/go-try",
+        "techStack": [
+          {
+            "name": "TypeScript"
+          },
+          {
+            "name": "Jest"
+          },
+          {
+            "name": "tsup"
+          }
+        ]
+      },
+      {
+        "title": "react-router-modal-gallery",
+        "description": "A simple package to create modal gallery with react-router",
+        "image": "/projects/npm.jpg",
+        "sourceCodeUrl": "https://github.com/onderonur/react-router-modal-gallery",
+        "techStack": [
+          {
+            "name": "JavaScript"
+          },
+          {
+            "name": "nwb"
+          },
+          {
+            "name": "React"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Other",
+    "items": [
+      {
+        "title": "Super Mario - Single Div Pixel Art",
+        "description": "HTML and CSS only Super Mario, created with a single div",
+        "image": "/projects/super-mario-pixelart.jpg",
+        "demoUrl": "https://codepen.io/onderonur/full/VwjjLZz",
+        "sourceCodeUrl": "https://codepen.io/onderonur/pen/VwjjLZz",
+        "techStack": [
+          {
+            "name": "HTML"
+          },
+          {
+            "name": "CSS"
+          }
+        ]
+      },
+      {
+        "title": "Day & Night Trip",
+        "description": "CSS Animated SVG",
+        "image": "/projects/day-and-night-trip.jpg",
+        "demoUrl": "https://codepen.io/onderonur/full/eYzVyNy",
+        "sourceCodeUrl": "https://codepen.io/onderonur/pen/eYzVyNy",
+        "techStack": [
+          {
+            "name": "HTML"
+          },
+          {
+            "name": "CSS"
+          },
+          {
+            "name": "SVG"
+          }
+        ]
+      }
+    ]
+  }
+]

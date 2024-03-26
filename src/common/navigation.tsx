@@ -49,7 +49,7 @@ export function MobileNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 border-t bg-background p-1 sm:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-10 border-t bg-background p-1 sm:hidden">
       <ul className="flex w-full sm:gap-6">
         {navigationLinks.map((link) => {
           const { Icon } = link;

@@ -65,8 +65,9 @@ export async function getBlogPost({ slug }: { slug: string }) {
 
   return {
     current: blogPosts[foundIndex],
-    previous: foundIndex > 0 ? blogPosts[foundIndex - 1] : null,
-    next: foundIndex < blogPosts.length - 1 ? blogPosts[foundIndex + 1] : null,
+    previous:
+      foundIndex < blogPosts.length - 1 ? blogPosts[foundIndex + 1] : null,
+    next: foundIndex > 0 ? blogPosts[foundIndex - 1] : null,
   };
 }
 

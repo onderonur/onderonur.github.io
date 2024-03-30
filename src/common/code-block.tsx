@@ -11,16 +11,21 @@ export async function CodeBlock({ slug, title, fileName }: CodeBlockProps) {
   const fileContent = await fs.readFile(
     `${process.cwd()}/public/blog/${slug}/${fileName}`,
   );
+
+  let source = '```';
+
   const extension = fileName.split('.').pop();
 
-  let source = `\`\`\`${extension}`;
-
-  if (title) {
-    source += ` title="${title}"`;
+  if (extension) {
+    source = `${source}${extension}`;
   }
 
-  source += `\n${fileContent.toString()}`;
-  source += `\`\`\``;
+  if (title) {
+    source = `${source} title="${title}"`;
+  }
+
+  source = `${source}\n${fileContent.toString()}`;
+  source = `${source}\`\`\``;
 
   return <MDXContent source={source} />;
 }

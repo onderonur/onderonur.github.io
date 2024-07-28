@@ -95,52 +95,16 @@ const config = {
       );
     }),
     plugin(({ matchUtilities, theme }) => {
-      const cssVariableKey = '--fixed-line-height';
-
       matchUtilities(
         {
-          'fixed-leading': (value: string) => {
-            let lineHeight = value;
-
-            // Some `lineHeight` values does not end with `rem` like `normal: 1.5`.
-            // To handle these values, we add `em` at the end of them
-            // to calculate `lineHeight * fontSize` value of the current element.
-            if (!lineHeight.endsWith('rem')) {
-              lineHeight = `${lineHeight}em`;
-            }
-
+          'grid-cols-autofill': (value: string) => {
             return {
-              [cssVariableKey]: lineHeight,
-              lineHeight,
+              gridTemplateColumns: `repeat(auto-fill, minmax(min(100%, ${value}), 1fr))`,
             };
           },
         },
         {
-          values: theme('lineHeight'),
-        },
-      );
-
-      matchUtilities(
-        {
-          'fixed-line-clamp': (val) => {
-            return {
-              minHeight: `calc(var(${cssVariableKey}) * ${val})`,
-              // For line clamp
-              overflow: 'hidden',
-              display: '-webkit-box',
-              '-webkit-box-orient': 'vertical',
-              '-webkit-line-clamp': `${val}`,
-            };
-          },
-        },
-        {
-          values: {
-            '1': 1,
-            '2': 2,
-            '3': 3,
-            '4': 4,
-            '5': 5,
-          },
+          values: theme('spacing'),
         },
       );
     }),

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/shadcn-ui/ui/card';
-import Image from 'next/image';
+import { SkillIcon } from './skill-icon';
 import type { Skill } from './skill-utils';
 
 type SkillCardProps = {
@@ -8,14 +8,11 @@ type SkillCardProps = {
 
 export function SkillCard({ skill }: SkillCardProps) {
   return (
-    <Card className="h-full">
-      <CardHeader className="pb-4">
-        <Image
-          className="mx-auto h-10 w-10 rounded-md"
-          src={skill.icon}
-          alt={skill.name}
-          width={100}
-          height={100}
+    <Card className="flex h-full flex-col">
+      <CardHeader className="flex-grow justify-center pb-4">
+        <SkillIcon
+          className="mx-auto text-4xl text-muted-foreground"
+          icon={skill.icon}
         />
       </CardHeader>
       <CardContent>

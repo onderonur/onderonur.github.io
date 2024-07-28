@@ -2,14 +2,14 @@ import { stripHtml } from '@/common/common-utils';
 import { ShareButtons } from '@/common/share-buttons';
 import Image from 'next/image';
 import type { BlogPost } from './blog-utils';
-import { getBlogDate } from './blog-utils';
+import { formatBlogPostDate } from './blog-utils';
 
 type BlogPostHeaderProps = {
   frontmatter: BlogPost;
 };
 
 export function BlogPostHeader({
-  frontmatter: { title, publishedAt, url, heroPath, heroCaption },
+  frontmatter: { title, publishedAt, updatedAt, url, heroPath, heroCaption },
 }: BlogPostHeaderProps) {
   return (
     <header>
@@ -17,7 +17,10 @@ export function BlogPostHeader({
         <h1 className="m-0 bg-gradient-to-br from-rose-500 to-primary bg-clip-text pb-2 text-transparent">
           {title}
         </h1>
-        <p className="m-0 text-muted-foreground">{getBlogDate(publishedAt)}</p>
+        <p className="m-0 text-muted-foreground">
+          Published at {formatBlogPostDate(publishedAt)}.
+          {updatedAt && ` Last updated at ${formatBlogPostDate(updatedAt)}.`}
+        </p>
       </div>
       <div>
         <ShareButtons url={url} />

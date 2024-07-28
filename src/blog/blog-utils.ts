@@ -8,6 +8,7 @@ const baseBlogPostSchema = z.object({
   title: z.string().min(1),
   description: z.string().min(1),
   publishedAt: z.coerce.date(),
+  updatedAt: z.coerce.date().optional(),
   heroCaption: z.string().optional(),
 });
 
@@ -32,8 +33,8 @@ export async function getBlogPosts() {
   ]);
 
   const blogPosts = baseBlogPosts.map((blogPost) => {
-    const path = `/blog/${blogPost.slug}/`;
-    const heroPath = `${path}hero.jpg`;
+    const path = `/blog/${blogPost.slug}`;
+    const heroPath = `${path}/hero.jpg`;
 
     return {
       ...blogPost,
@@ -48,7 +49,10 @@ export async function getBlogPosts() {
   });
 
   blogPosts.sort((blogPostA, blogPostB) =>
-    compareDesc(blogPostA.data.publishedAt, blogPostB.data.publishedAt),
+    compareDesc(
+      getBlogPostDate(blogPostA.data),
+      getBlogPostDate(blogPostB.data),
+    ),
   );
 
   return blogPosts;
@@ -78,11 +82,17 @@ export async function getBlogPostComponents({ slug }: { slug: string }) {
     )) as MDXComponents;
 
     return components;
-  } catch (error) {
+  } catch {
     return {};
   }
 }
 
-export function getBlogDate(date: Date) {
+export function formatBlogPostDate(date: Date) {
   return format(date, 'MMMM dd, yyyy');
+}
+
+export function getBlogPostDate(
+  blogPost: Pick<BlogPost, 'publishedAt' | 'updatedAt'>,
+) {
+  return blogPost.updatedAt ?? blogPost.publishedAt;
 }

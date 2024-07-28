@@ -1,4 +1,6 @@
-type ShowcaseProps = React.PropsWithChildren;
+type ShowcaseProps = {
+  children: React.ReactNode;
+};
 
 export function Showcase({ children }: ShowcaseProps) {
   return (

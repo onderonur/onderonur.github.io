@@ -1,7 +1,7 @@
 import { AuthorContactInfo } from '@/author/author-contact-info';
 import { ButtonLink } from '@/common/button-link';
-import { Link } from '@/common/link';
 import { MobileNavigation, Navigation } from '@/common/navigation';
+import { Link } from '@/routing/link';
 import { JsonLd } from '@/seo/json-ld';
 import { TooltipProvider } from '@/shadcn-ui/ui/tooltip';
 import { getSite } from '@/site/site-utils';
@@ -18,7 +18,9 @@ export const viewport: Viewport = {
   themeColor: '#020817',
 };
 
-type RootLayoutProps = React.PropsWithChildren;
+type RootLayoutProps = {
+  children: React.ReactNode;
+};
 
 export default async function RootLayout({ children }: RootLayoutProps) {
   const site = await getSite();

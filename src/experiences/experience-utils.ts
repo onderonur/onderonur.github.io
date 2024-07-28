@@ -1,7 +1,7 @@
 import { getContents } from '@/content/content-utils';
 import { z } from 'zod';
 
-const baseExperienceSchema = z.object({
+const experienceSchema = z.object({
   role: z.string(),
   company: z.string(),
   dateRange: z.string(),
@@ -9,17 +9,9 @@ const baseExperienceSchema = z.object({
   order: z.number(),
 });
 
-const experienceSchema = baseExperienceSchema.merge(
-  z.object({
-    logo: z.string(),
-  }),
-);
-
-export type Experience = z.infer<typeof experienceSchema>;
-
 export async function getExperiences() {
   const baseExperiences = await getContents({
-    schema: baseExperienceSchema,
+    schema: experienceSchema,
     contentName: 'experiences',
   });
 

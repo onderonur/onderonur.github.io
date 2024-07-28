@@ -6,10 +6,10 @@ import {
   getBlogPosts,
 } from '@/blog/blog-utils';
 import { stripHtml } from '@/common/common-utils';
-import { Link } from '@/common/link';
 import { MDXContent } from '@/common/mdx-content';
 import { Prose } from '@/common/prose';
 import { ShareButtons } from '@/common/share-buttons';
+import { Link } from '@/routing/link';
 import { getMetadata } from '@/seo/seo-utils';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import type { Metadata } from 'next';

@@ -13,7 +13,9 @@ export async function getContents<Schema extends z.ZodTypeAny>({
 }): Promise<Content<Schema>[]> {
   const contentPath = `${process.cwd()}/public/${contentName}`;
 
-  const slugs = (await fs.readdir(contentPath, { withFileTypes: true }))
+  const files = await fs.readdir(contentPath, { withFileTypes: true });
+
+  const slugs = files
     .filter((item) => item.isDirectory())
     .map((item) => item.name);
 
@@ -21,18 +23,16 @@ export async function getContents<Schema extends z.ZodTypeAny>({
     slugs.map((slug) => fs.readFile(`${contentPath}/${slug}/index.mdx`)),
   );
 
-  const contents: Content<Schema>[] = [];
-
-  for (let i = 0; i < fileContents.length; i++) {
+  const contents: Content<Schema>[] = fileContents.map((fileContent, i) => {
     const slug = slugs[i];
-    const { data, content } = matter(fileContents[i]);
-    contents.push({
+    const { data, content } = matter(fileContent);
+    return {
       slug,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       data: schema.parse(data),
       content,
-    });
-  }
+    };
+  });
 
   return contents;
 }

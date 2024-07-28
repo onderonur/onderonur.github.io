@@ -16,7 +16,10 @@ import {
   TwitterShareButton as XShareButton,
 } from 'react-share';
 
-type ShareButtonTooltipProps = React.PropsWithChildren<{ name: string }>;
+type ShareButtonTooltipProps = {
+  name: string;
+  children: React.ReactNode;
+};
 
 function ShareButtonTooltip({ name, children }: ShareButtonTooltipProps) {
   return (

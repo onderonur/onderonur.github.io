@@ -9,14 +9,14 @@ import {
 } from '@radix-ui/react-icons';
 import { usePathname } from 'next/navigation';
 import { twJoin } from 'tailwind-merge';
+import { Link } from '../routing/link';
 import { ButtonLink } from './button-link';
-import { Link } from './link';
 
 const navigationLinks = [
-  { title: 'Skills', href: '/skills/', Icon: RocketIcon },
-  { title: 'Experiences', href: '/experiences/', Icon: GlobeIcon },
-  { title: 'Projects', href: '/projects/', Icon: CodeIcon },
-  { title: 'Blog', href: '/blog/', Icon: Pencil2Icon },
+  { title: 'Skills', href: '/skills', Icon: RocketIcon },
+  { title: 'Experiences', href: '/experiences', Icon: GlobeIcon },
+  { title: 'Projects', href: '/projects', Icon: CodeIcon },
+  { title: 'Blog', href: '/blog', Icon: Pencil2Icon },
 ];
 
 export function Navigation() {

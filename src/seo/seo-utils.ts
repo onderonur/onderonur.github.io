@@ -21,7 +21,6 @@ export async function getMetadata({
     : site.title;
   const metaDescription = description || site.description;
   const metaImages = images || [{ url: site.image, alt: site.title }];
-  const formattedPathname = pathname.endsWith('/') ? pathname : `${pathname}/`;
 
   return {
     title: metaTitle,
@@ -32,7 +31,7 @@ export async function getMetadata({
       title: metaTitle,
       description: metaDescription,
       images: metaImages,
-      url: formattedPathname,
+      url: pathname,
       type: 'website',
       siteName: site.title,
       locale: 'en_US',
@@ -45,7 +44,7 @@ export async function getMetadata({
       creator: author.data.xUsername,
     },
     alternates: {
-      canonical: formattedPathname,
+      canonical: pathname,
     },
     verification: {
       google: site.googleSiteVerification,

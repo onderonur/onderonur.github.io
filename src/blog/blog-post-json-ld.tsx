@@ -9,7 +9,7 @@ type BlogPostJsonLd = {
 };
 
 export async function BlogPostJsonLd({
-  frontmatter: { title, description, heroUrl, publishedAt },
+  frontmatter: { title, description, heroUrl, publishedAt, updatedAt },
 }: BlogPostJsonLd) {
   const [site, author] = await Promise.all([getSite(), getAuthor()]);
 
@@ -22,6 +22,7 @@ export async function BlogPostJsonLd({
         image: heroUrl,
         description,
         datePublished: publishedAt.toISOString(),
+        dateModified: updatedAt?.toISOString(),
         author: [
           {
             '@type': 'Person',

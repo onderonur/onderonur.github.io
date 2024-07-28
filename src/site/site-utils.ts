@@ -10,8 +10,6 @@ const siteSchema = z.object({
   googleSiteVerification: z.string(),
 });
 
-export type Site = z.infer<typeof siteSchema>;
-
 export async function getSite() {
   const site = await getData({ schema: siteSchema, contentName: 'site' });
   return site;

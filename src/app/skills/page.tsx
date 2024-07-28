@@ -26,7 +26,7 @@ export default async function SkillsPage() {
         <PageHeaderTitle>{PAGE_TITLE}</PageHeaderTitle>
         <PageHeaderDescription>{PAGE_DESCRIPTION}</PageHeaderDescription>
       </PageHeader>
-      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <ul className="grid gap-4 grid-cols-autofill-36">
         {skills.map((skill) => {
           return (
             <li key={skill.name}>

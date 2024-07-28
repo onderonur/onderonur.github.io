@@ -1,5 +1,5 @@
 import { BlogPostImage } from '@/blog/blog-post-image';
-import { Link } from '@/common/link';
+import { Link } from '@/routing/link';
 import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -19,7 +19,6 @@ export function MDXContent({ components, options, ...rest }: MDXContentProps) {
   return (
     <MDXRemote
       components={{
-        // TODO: Fix typing.
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
         a: Link as any,
         Image: BlogPostImage,

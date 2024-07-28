@@ -1,6 +1,9 @@
 import { twMerge } from 'tailwind-merge';
 
-type ProseProps = React.PropsWithChildren<{ className?: string }>;
+type ProseProps = {
+  className?: string;
+  children: React.ReactNode;
+};
 
 export function Prose({ className, children }: ProseProps) {
   return (

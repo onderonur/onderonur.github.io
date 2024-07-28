@@ -1,18 +1,19 @@
 import { getBlogPosts } from '@/blog/blog-utils';
+import { ensureTrailingSlash } from '@/routing/routing-utils';
 import { getSite } from '@/site/site-utils';
 import { promises as fs } from 'node:fs';
 import { create } from 'xmlbuilder2';
 
 export default async function generateSitemap() {
   const [site, blogPosts] = await Promise.all([getSite(), getBlogPosts()]);
-  const pathnames = ['/', '/experiences/', '/skills/', '/projects/', '/blog/'];
+  const pathnames = ['/', '/experiences', '/skills', '/projects', '/blog'];
 
   const pages = [
     ...pathnames.map((pathname) => ({
-      url: `${site.baseUrl}${pathname}`,
+      url: ensureTrailingSlash(`${site.baseUrl}${pathname}`),
     })),
     ...blogPosts.map((blogPost) => ({
-      url: blogPost.data.url,
+      url: ensureTrailingSlash(blogPost.data.url),
     })),
   ];
 
@@ -45,7 +46,8 @@ export default async function generateSitemap() {
   await fs.writeFile(`${process.cwd()}/src/app/sitemap.xml`, xml.toString());
 }
 
-generateSitemap().catch((error) => {
+// eslint-disable-next-line unicorn/prefer-top-level-await
+generateSitemap().catch((error: unknown) => {
   // eslint-disable-next-line no-console
   console.log(
     'Error happened while generating sitemap:',

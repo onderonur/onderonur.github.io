@@ -1,7 +1,7 @@
 import { getContents } from '@/content/content-utils';
 import { z } from 'zod';
 
-const baseAuthorSchema = z.object({
+const authorSchema = z.object({
   name: z.string(),
   role: z.string(),
   xUsername: z.string(),
@@ -10,17 +10,9 @@ const baseAuthorSchema = z.object({
   mail: z.string(),
 });
 
-const authorSchema = baseAuthorSchema.merge(
-  z.object({
-    avatarPath: z.string(),
-  }),
-);
-
-export type Author = z.infer<typeof authorSchema>;
-
 export async function getAuthor() {
   const baseAuthors = await getContents({
-    schema: baseAuthorSchema,
+    schema: authorSchema,
     contentName: 'authors',
   });
 

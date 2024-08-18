@@ -6,9 +6,12 @@
 name: Deploy Next.js site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
+  # Runs when `Quality` workflow gets completed on `main` branch
+  workflow_run:
     branches: ['main']
+    workflows: ['Quality']
+    types:
+      - completed
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -28,15 +31,15 @@ concurrency:
 jobs:
   # Build job
   build:
+    # Since `workflow_run` only has 3 activity types (`completed`, `requested` and `in_progress`),
+    # even if `Quality` workflow gets completed by failing, this workflow starts to run.
+    # To prevent this, we add a condition here.
+    # https://github.com/orgs/community/discussions/26238#discussioncomment-3250901
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: npm
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Restore cache
@@ -49,8 +52,8 @@ jobs:
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      - name: Install dependencies
-        run: npm ci
+      - name: Install
+        uses: ./.github/composite-actions/install
       - name: Build with Next.js
         run: npm run build
       - name: Upload artifact

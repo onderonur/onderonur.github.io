@@ -10,18 +10,18 @@ export function AuthorContactInfo() {
       <ButtonLink
         variant="ghost"
         size="icon"
-        href={`https://x.com/onderonur_`}
-        aria-label="X profile"
-      >
-        <FaXTwitter className={iconClassName} />
-      </ButtonLink>
-      <ButtonLink
-        variant="ghost"
-        size="icon"
         href={`https://github.com/onderonur`}
         aria-label="GitHub profile"
       >
         <RxGithubLogo className={iconClassName} />
+      </ButtonLink>
+      <ButtonLink
+        variant="ghost"
+        size="icon"
+        href={`https://x.com/onderonur_`}
+        aria-label="X profile"
+      >
+        <FaXTwitter className={iconClassName} />
       </ButtonLink>
       <ButtonLink
         variant="ghost"

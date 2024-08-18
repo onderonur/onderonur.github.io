@@ -1,22 +1,17 @@
 'use client';
 
 import '@/styles/globals.css';
-import {
-  CodeIcon,
-  GlobeIcon,
-  Pencil2Icon,
-  RocketIcon,
-} from '@radix-ui/react-icons';
 import { usePathname } from 'next/navigation';
+import { RxCode, RxGlobe, RxPencil2, RxRocket } from 'react-icons/rx';
 import { twJoin } from 'tailwind-merge';
 import { Link } from '../routing/link';
 import { ButtonLink } from './button-link';
 
 const navigationLinks = [
-  { title: 'Skills', href: '/skills', Icon: RocketIcon },
-  { title: 'Experiences', href: '/experiences', Icon: GlobeIcon },
-  { title: 'Projects', href: '/projects', Icon: CodeIcon },
-  { title: 'Blog', href: '/blog', Icon: Pencil2Icon },
+  { title: 'Skills', href: '/skills', icon: RxRocket },
+  { title: 'Experiences', href: '/experiences', icon: RxGlobe },
+  { title: 'Projects', href: '/projects', icon: RxCode },
+  { title: 'Blog', href: '/blog', icon: RxPencil2 },
 ];
 
 export function Navigation() {
@@ -52,8 +47,6 @@ export function MobileNavigation() {
     <nav className="fixed inset-x-0 bottom-0 z-10 border-t bg-background p-1 sm:hidden">
       <ul className="flex w-full sm:gap-6">
         {navigationLinks.map((link) => {
-          const { Icon } = link;
-
           return (
             <li key={link.href} className="w-1/4">
               <ButtonLink
@@ -64,7 +57,7 @@ export function MobileNavigation() {
                   link.href !== pathname && 'text-muted-foreground',
                 )}
               >
-                <Icon className="h-5 w-5" />
+                <link.icon className="h-5 w-5" />
                 {link.title}
               </ButtonLink>
             </li>

@@ -6,9 +6,9 @@ import { JsonLd } from '@/seo/json-ld';
 import { TooltipProvider } from '@/shadcn-ui/ui/tooltip';
 import { getSite } from '@/site/site-utils';
 import '@/styles/globals.css';
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import type { Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import { RxGithubLogo } from 'react-icons/rx';
 import type { WebSite } from 'schema-dts';
 import { twJoin } from 'tailwind-merge';
 
@@ -65,7 +65,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               className="ml-auto"
               aria-label="Source code on GitHub"
             >
-              <GitHubLogoIcon className="h-4 w-4" />
+              <RxGithubLogo className="h-4 w-4" />
             </ButtonLink>
           </header>
           <div className="mx-auto mt-16 w-full max-w-screen-lg px-4 py-8">

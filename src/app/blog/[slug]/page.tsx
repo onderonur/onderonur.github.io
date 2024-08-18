@@ -11,9 +11,9 @@ import { Prose } from '@/common/prose';
 import { ShareButtons } from '@/common/share-buttons';
 import { Link } from '@/routing/link';
 import { getMetadata } from '@/seo/seo-utils';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { RxChevronLeft, RxChevronRight } from 'react-icons/rx';
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
 export async function generateStaticParams() {
@@ -103,7 +103,7 @@ export default async function BlogPostPage({
                   <div className="text-sm text-muted-foreground">Previous</div>
                   <div className="line-clamp-2">{previous.data.title}</div>
                 </div>
-                <ChevronLeftIcon className="mt-5 h-6 w-6 flex-none" />
+                <RxChevronLeft className="mt-5 h-6 w-6 flex-none" />
               </Link>
             )}
             {next && (
@@ -115,7 +115,7 @@ export default async function BlogPostPage({
                   <div className="text-sm text-muted-foreground">Next</div>
                   <div className="line-clamp-2">{next.data.title}</div>
                 </div>
-                <ChevronRightIcon className="mt-5 h-6 w-6 flex-none" />
+                <RxChevronRight className="mt-5 h-6 w-6 flex-none" />
               </Link>
             )}
           </div>

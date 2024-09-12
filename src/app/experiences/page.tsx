@@ -1,16 +1,16 @@
-import { MDXContent } from '@/common/mdx-content';
-import { PageHeader, PageHeaderTitle } from '@/common/page-header';
-import { Prose } from '@/common/prose';
-import { getExperiences } from '@/experiences/experience-utils';
-import { getMetadata } from '@/seo/seo-utils';
+import { getMetadata } from '@/core/seo/seo.utils';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/shadcn-ui/ui/card';
-import { Separator } from '@/shadcn-ui/ui/separator';
+} from '@/core/shadcn-ui/ui/card';
+import { Separator } from '@/core/shadcn-ui/ui/separator';
+import { MDXContent } from '@/core/ui/components/mdx-content';
+import { PageHeader, PageHeaderTitle } from '@/core/ui/components/page-header';
+import { Prose } from '@/core/ui/components/prose';
+import { getExperiences } from '@/features/experiences/experience.data';
 import Image from 'next/image';
 
 const PAGE_TITLE = 'Experiences';

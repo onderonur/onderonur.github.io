@@ -1,6 +1,6 @@
-import { getBlogPosts } from '@/blog/blog-utils';
-import { ensureTrailingSlash } from '@/routing/routing-utils';
-import { getSite } from '@/site/site-utils';
+import { ensureTrailingSlash } from '@/core/routing/routing.utils';
+import { getBlogPosts } from '@/features/blog/blog.data';
+import { getSite } from '@/features/site/site.data';
 import { promises as fs } from 'node:fs';
 import { create } from 'xmlbuilder2';
 

@@ -1,18 +1,22 @@
-import { AuthorContactInfo } from '@/author/author-contact-info';
-import { ButtonLink } from '@/common/button-link';
-import { MobileNavigation, Navigation } from '@/common/navigation';
-import { Link } from '@/routing/link';
-import { JsonLd } from '@/seo/json-ld';
-import { TooltipProvider } from '@/shadcn-ui/ui/tooltip';
-import { getSite } from '@/site/site-utils';
-import '@/styles/globals.css';
+import { Link } from '@/core/routing/components/link';
+import { JsonLd } from '@/core/seo/components/json-ld';
+import { TooltipProvider } from '@/core/shadcn-ui/ui/tooltip';
+import '@/core/styles/globals.css';
+import { ButtonLink } from '@/core/ui/components/button-link';
+import { MobileNavigation, Navigation } from '@/core/ui/components/navigation';
+import { AuthorContactInfo } from '@/features/author/components/author-contact-info';
+import { getSite } from '@/features/site/site.data';
 import type { Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { RxGithubLogo } from 'react-icons/rx';
 import type { WebSite } from 'schema-dts';
 import { twJoin } from 'tailwind-merge';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  variable: '--font-inter',
+  display: 'swap',
+  subsets: ['latin'],
+});
 
 export const viewport: Viewport = {
   themeColor: '#020817',
@@ -29,6 +33,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={twJoin(
+        inter.variable,
+        'font-sans',
         'dark [color-scheme:dark]',
         // fluid font-size:
         // 14px - 16px for 640px - 1024px viewport
@@ -37,7 +43,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     >
       <body
         className={twJoin(
-          inter.className,
           'grid min-h-screen grid-rows-[auto_1fr_auto] bg-background text-foreground',
           // To prevent content to overflow screen horizontally.
           // Since `<body>` is `grid`, this is needed.

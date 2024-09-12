@@ -1,11 +1,11 @@
+import { getMetadata } from '@/core/seo/seo.utils';
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderTitle,
-} from '@/common/page-header';
-import { getMetadata } from '@/seo/seo-utils';
-import { SkillCard } from '@/skills/skill-card';
-import { getSkills } from '@/skills/skill-utils';
+} from '@/core/ui/components/page-header';
+import { SkillCard } from '@/features/skills/components/skill-card';
+import { getSkills } from '@/features/skills/skills.data';
 
 const PAGE_TITLE = 'Skills';
 const PAGE_DESCRIPTION =

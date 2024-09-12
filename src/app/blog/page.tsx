@@ -1,6 +1,6 @@
-import { BlogPosts } from '@/blog/blog-posts';
-import { PageHeader, PageHeaderTitle } from '@/common/page-header';
-import { getMetadata } from '@/seo/seo-utils';
+import { getMetadata } from '@/core/seo/seo.utils';
+import { PageHeader, PageHeaderTitle } from '@/core/ui/components/page-header';
+import { BlogPosts } from '@/features/blog/components/blog-posts';
 
 const PAGE_TITLE = 'Blog';
 const PAGE_DESCRIPTION = 'Software Development Journey: Explore My Blog';

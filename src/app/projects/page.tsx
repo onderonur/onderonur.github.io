@@ -1,10 +1,10 @@
+import { getMetadata } from '@/core/seo/seo.utils';
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderTitle,
-} from '@/common/page-header';
-import { Projects } from '@/projects/projects';
-import { getMetadata } from '@/seo/seo-utils';
+} from '@/core/ui/components/page-header';
+import { Projects } from '@/features/projects/components/projects';
 
 const PAGE_TITLE = 'Projects';
 const PAGE_DESCRIPTION =

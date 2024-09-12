@@ -1,16 +1,16 @@
-import { BlogPostHeader } from '@/blog/blog-post-header';
-import { BlogPostJsonLd } from '@/blog/blog-post-json-ld';
+import { Link } from '@/core/routing/components/link';
+import { getMetadata } from '@/core/seo/seo.utils';
+import { MDXContent } from '@/core/ui/components/mdx-content';
+import { Prose } from '@/core/ui/components/prose';
+import { ShareButtons } from '@/core/ui/components/share-buttons';
+import { stripHtml } from '@/core/ui/ui.utils';
 import {
   getBlogPost,
   getBlogPostComponents,
   getBlogPosts,
-} from '@/blog/blog-utils';
-import { stripHtml } from '@/common/common-utils';
-import { MDXContent } from '@/common/mdx-content';
-import { Prose } from '@/common/prose';
-import { ShareButtons } from '@/common/share-buttons';
-import { Link } from '@/routing/link';
-import { getMetadata } from '@/seo/seo-utils';
+} from '@/features/blog/blog.data';
+import { BlogPostHeader } from '@/features/blog/components/blog-post-header';
+import { BlogPostJsonLd } from '@/features/blog/components/blog-post-json-ld';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { RxChevronLeft, RxChevronRight } from 'react-icons/rx';

@@ -10,12 +10,6 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
-    remotePatterns: [
-      {
-        hostname: 'picsum.photos',
-        protocol: 'https',
-      },
-    ],
   },
   eslint: {
     // To make `next lint` check files and folders besides the default folders (`src`, `app` etc.):

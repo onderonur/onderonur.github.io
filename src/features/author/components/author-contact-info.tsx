@@ -3,7 +3,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { RxEnvelopeClosed, RxGithubLogo, RxLinkedinLogo } from 'react-icons/rx';
 
 export function AuthorContactInfo() {
-  const iconClassName = 'h-6 w-6';
+  const iconClassName = 'size-6';
 
   return (
     <div className="flex gap-1">

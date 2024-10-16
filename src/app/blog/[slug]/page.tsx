@@ -103,7 +103,7 @@ export default async function BlogPostPage({
                   <div className="text-sm text-muted-foreground">Previous</div>
                   <div className="line-clamp-2">{previous.data.title}</div>
                 </div>
-                <RxChevronLeft className="mt-5 h-6 w-6 flex-none" />
+                <RxChevronLeft className="mt-5 size-6 flex-none" />
               </Link>
             )}
             {next && (
@@ -115,7 +115,7 @@ export default async function BlogPostPage({
                   <div className="text-sm text-muted-foreground">Next</div>
                   <div className="line-clamp-2">{next.data.title}</div>
                 </div>
-                <RxChevronRight className="mt-5 h-6 w-6 flex-none" />
+                <RxChevronRight className="mt-5 size-6 flex-none" />
               </Link>
             )}
           </div>

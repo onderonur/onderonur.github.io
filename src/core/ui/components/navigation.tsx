@@ -56,7 +56,7 @@ export function MobileNavigation() {
                   link.href !== pathname && 'text-muted-foreground',
                 )}
               >
-                <link.icon className="h-5 w-5" />
+                <link.icon className="size-5" />
                 {link.title}
               </ButtonLink>
             </li>

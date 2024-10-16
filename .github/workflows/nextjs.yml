@@ -55,7 +55,7 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
       - name: Build with Next.js
-        run: npm run build
+        run: pnpm build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

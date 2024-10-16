@@ -99,6 +99,7 @@ const config = {
   plugins: [
     require('tailwindcss-animate'),
     require('@tailwindcss/typography'),
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     plugin(({ addVariant }) => {
       addVariant(
         'non-rehype-code',
@@ -115,6 +116,7 @@ const config = {
         '& figcaption[data-rehype-pretty-code-title] + pre',
       );
     }),
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {

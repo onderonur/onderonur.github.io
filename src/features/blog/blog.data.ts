@@ -1,7 +1,7 @@
 import { getContents } from '@/features/content/content.data';
 import { getSite } from '@/features/site/site.data';
 import { compareDesc } from 'date-fns';
-import type { MDXComponents } from 'mdx/types';
+import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { baseBlogPostSchema } from './blog.schemas';
 import { getBlogPostDate } from './blog.utils';
 
@@ -61,7 +61,7 @@ export async function getBlogPostComponents({ slug }: { slug: string }) {
   try {
     const components = (await import(
       `../../../public/blog/${slug}/components`
-    )) as MDXComponents;
+    )) as MDXRemoteProps['components'];
 
     return components;
   } catch {

@@ -70,7 +70,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               className="ml-auto"
               aria-label="Source code on GitHub"
             >
-              <RxGithubLogo className="h-4 w-4" />
+              <RxGithubLogo className="size-4" />
             </ButtonLink>
           </header>
           <div className="mx-auto mt-16 w-full max-w-screen-lg px-4 py-8">

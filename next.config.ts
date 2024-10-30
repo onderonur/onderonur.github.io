@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
   // https://nextjs.org/docs/app/building-your-application/deploying/static-exports
   output: 'export',
   // This is enabled since the previous site built with Gatsby had trailing slashes.

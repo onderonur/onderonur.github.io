@@ -1,16 +1,21 @@
 'use client';
 
 import { Link } from '@/core/routing/components/link';
+import { ensureTrailingSlash } from '@/core/routing/routing.utils';
 import { ButtonLink } from '@/core/ui/components/button-link';
 import { usePathname } from 'next/navigation';
 import { RxCode, RxGlobe, RxPencil2, RxRocket } from 'react-icons/rx';
 import { twJoin } from 'tailwind-merge';
 
 const navigationLinks = [
-  { title: 'Skills', href: '/skills', icon: RxRocket },
-  { title: 'Experiences', href: '/experiences', icon: RxGlobe },
-  { title: 'Projects', href: '/projects', icon: RxCode },
-  { title: 'Blog', href: '/blog', icon: RxPencil2 },
+  { title: 'Skills', href: ensureTrailingSlash('/skills'), icon: RxRocket },
+  {
+    title: 'Experiences',
+    href: ensureTrailingSlash('/experiences'),
+    icon: RxGlobe,
+  },
+  { title: 'Projects', href: ensureTrailingSlash('/projects'), icon: RxCode },
+  { title: 'Blog', href: ensureTrailingSlash('/blog'), icon: RxPencil2 },
 ];
 
 export function Navigation() {

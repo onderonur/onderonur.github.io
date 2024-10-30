@@ -25,12 +25,14 @@ export async function generateStaticParams() {
 }
 
 type BlogPostPageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({
-  params: { slug },
-}: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: BlogPostPageProps,
+): Promise<Metadata> {
+  const { slug } = await props.params;
+
   const blogPost = await getBlogPost({ slug });
 
   if (!blogPost) {
@@ -52,9 +54,9 @@ export async function generateMetadata({
   });
 }
 
-export default async function BlogPostPage({
-  params: { slug },
-}: BlogPostPageProps) {
+export default async function BlogPostPage(props: BlogPostPageProps) {
+  const { slug } = await props.params;
+
   const [components, blogPost] = await Promise.all([
     getBlogPostComponents({ slug }),
     getBlogPost({ slug }),

@@ -6,7 +6,7 @@
     "build": "next build",
     "codequality:check": "pnpm format:check && pnpm lint:check && pnpm types:check",
     "codequality:fix": "pnpm format:fix && pnpm lint:fix && pnpm types:check",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "format:check": "prettier --check --ignore-unknown .",
     "format:fix": "prettier --write --ignore-unknown .",
     "generate-sitemap": "dotenv tsx ./scripts/generate-sitemap.ts",
@@ -27,13 +27,14 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "gray-matter": "^4.0.3",
-    "next": "14.2.5",
+    "next": "15.0.2",
     "next-mdx-remote": "^5.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-icons": "^5.3.0",
     "react-share": "^5.1.0",
     "rehype-pretty-code": "^0.13.2",
+    "shiki": "^1.22.2",
     "shikiji": "^0.10.2",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
@@ -44,14 +45,14 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.14",
     "@types/node": "^22.4.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
     "autoprefixer": "^10.4.20",
     "dotenv-cli": "^7.4.2",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.5",
+    "eslint-config-next": "15.0.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-deprecation": "^3.0.0",
     "eslint-plugin-only-warn": "^1.1.0",
@@ -70,5 +71,11 @@
     "tsx": "^4.17.0",
     "typescript": "^5.5.4"
   },
-  "packageManager": "pnpm@9.12.2"
+  "packageManager": "pnpm@9.12.2",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@19.0.0-rc.1",
+      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+    }
+  }
 }

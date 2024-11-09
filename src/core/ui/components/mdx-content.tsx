@@ -32,7 +32,7 @@ export function MDXContent({ components, options, ...rest }: MDXContentProps) {
           ...options?.mdxOptions,
           useDynamicImport: true,
           rehypePlugins: [
-            [rehypePrettyCode, { theme: 'github-dark-default' }],
+            [rehypePrettyCode, { theme: 'one-dark-pro' }],
           ] as RehypePlugins,
         },
       }}

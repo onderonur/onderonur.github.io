@@ -1,3 +1,4 @@
+import '@/core/env/env';
 import { ensureTrailingSlash } from '@/core/routing/routing.utils';
 import { getBlogPosts } from '@/features/blog/blog.data';
 import { getSite } from '@/features/site/site.data';

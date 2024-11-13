@@ -23,7 +23,7 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
       - name: Run format check
-        run: pnpm format:check
+        run: pnpm format
 
   lint:
     name: Lint
@@ -34,7 +34,7 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
       - name: Run lint check
-        run: pnpm lint:check
+        run: pnpm lint
 
   typecheck:
     name: Typecheck
@@ -45,7 +45,7 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
       - name: Run type check
-        run: pnpm types:check
+        run: pnpm typecheck
 
   build:
     name: Build

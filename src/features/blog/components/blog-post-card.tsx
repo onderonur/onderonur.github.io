@@ -6,11 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/core/shadcn-ui/ui/card';
-import type { BlogPost } from '@/features/blog/blog.schemas';
-import {
-  formatBlogPostDate,
-  getBlogPostDate,
-} from '@/features/blog/blog.utils';
+import type { BlogPost } from '@/features/blog/schemas';
+import { formatBlogPostDate, getBlogPostDate } from '@/features/blog/utils';
 import Image from 'next/image';
 
 type BlogPostCardProps = {

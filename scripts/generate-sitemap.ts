@@ -1,7 +1,7 @@
 import '@/core/env/env';
-import { ensureTrailingSlash } from '@/core/routing/routing.utils';
-import { getBlogPosts } from '@/features/blog/blog.data';
-import { getSite } from '@/features/site/site.data';
+import { ensureTrailingSlash } from '@/core/routing/utils';
+import { getBlogPosts } from '@/features/blog/data';
+import { getSite } from '@/features/site/data';
 import { promises as fs } from 'node:fs';
 import { create } from 'xmlbuilder2';
 

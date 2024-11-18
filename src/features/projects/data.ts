@@ -1,5 +1,5 @@
-import { getData } from '@/features/content/content.data';
-import { projectsSchema } from './projects.schemas';
+import { getData } from '@/features/contents/data';
+import { projectsSchema } from './schemas';
 
 export async function getProjects() {
   const projects = await getData({

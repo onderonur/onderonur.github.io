@@ -1,4 +1,4 @@
-import { getMetadata } from '@/core/seo/seo.utils';
+import { getMetadata } from '@/core/seo/utils';
 import {
   Card,
   CardContent,
@@ -10,7 +10,7 @@ import { Separator } from '@/core/shadcn-ui/ui/separator';
 import { MDXContent } from '@/core/ui/components/mdx-content';
 import { PageHeader, PageHeaderTitle } from '@/core/ui/components/page-header';
 import { Prose } from '@/core/ui/components/prose';
-import { getExperiences } from '@/features/experiences/experience.data';
+import { getExperiences } from '@/features/experiences/data';
 import Image from 'next/image';
 
 const PAGE_TITLE = 'Experiences';

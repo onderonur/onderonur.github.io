@@ -1,4 +1,4 @@
-import type { Content } from '@/features/content/content.types';
+import type { Content } from '@/features/contents/types';
 import matter from 'gray-matter';
 import { promises as fs } from 'node:fs';
 import type { z } from 'zod';

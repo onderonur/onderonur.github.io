@@ -1,7 +1,7 @@
 import { JsonLd } from '@/core/seo/components/json-ld';
-import { getAuthor } from '@/features/author/author.data';
-import type { BlogPost } from '@/features/blog/blog.schemas';
-import { getSite } from '@/features/site/site.data';
+import { getAuthor } from '@/features/author/data';
+import type { BlogPost } from '@/features/blog/schemas';
+import { getSite } from '@/features/site/data';
 import type { BlogPosting } from 'schema-dts';
 
 type BlogPostJsonLd = {

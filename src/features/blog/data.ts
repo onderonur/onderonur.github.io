@@ -1,9 +1,9 @@
-import { getContents } from '@/features/content/content.data';
-import { getSite } from '@/features/site/site.data';
+import { getContents } from '@/features/contents/data';
+import { getSite } from '@/features/site/data';
 import { compareDesc } from 'date-fns';
 import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
-import { baseBlogPostSchema } from './blog.schemas';
-import { getBlogPostDate } from './blog.utils';
+import { baseBlogPostSchema } from './schemas';
+import { getBlogPostDate } from './utils';
 
 export async function getBlogPosts() {
   const [baseBlogPosts, site] = await Promise.all([

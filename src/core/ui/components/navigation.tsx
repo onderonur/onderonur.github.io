@@ -1,7 +1,7 @@
 'use client';
 
 import { Link } from '@/core/routing/components/link';
-import { ensureTrailingSlash } from '@/core/routing/routing.utils';
+import { ensureTrailingSlash } from '@/core/routing/utils';
 import { ButtonLink } from '@/core/ui/components/button-link';
 import { usePathname } from 'next/navigation';
 import { RxCode, RxGlobe, RxPencil2, RxRocket } from 'react-icons/rx';

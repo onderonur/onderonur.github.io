@@ -1,7 +1,7 @@
 import { ShareButtons } from '@/core/ui/components/share-buttons';
-import { stripHtml } from '@/core/ui/ui.utils';
-import type { BlogPost } from '@/features/blog/blog.schemas';
-import { formatBlogPostDate } from '@/features/blog/blog.utils';
+import { stripHtml } from '@/core/ui/utils';
+import type { BlogPost } from '@/features/blog/schemas';
+import { formatBlogPostDate } from '@/features/blog/utils';
 import Image from 'next/image';
 
 type BlogPostHeaderProps = {

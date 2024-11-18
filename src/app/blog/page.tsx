@@ -1,4 +1,4 @@
-import { getMetadata } from '@/core/seo/seo.utils';
+import { getMetadata } from '@/core/seo/utils';
 import { PageHeader, PageHeaderTitle } from '@/core/ui/components/page-header';
 import { BlogPosts } from '@/features/blog/components/blog-posts';
 

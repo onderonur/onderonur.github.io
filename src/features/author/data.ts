@@ -1,5 +1,5 @@
-import { getContents } from '@/features/content/content.data';
-import { authorSchema } from './author.schemas';
+import { getContents } from '@/features/contents/data';
+import { authorSchema } from './schemas';
 
 export async function getAuthor() {
   const baseAuthors = await getContents({

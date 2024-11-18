@@ -1,6 +1,6 @@
 import { Section, SectionTitle } from '@/core/ui/components/section';
 import { ProjectCard } from '@/features/projects/components/project-card';
-import { getProjects } from '@/features/projects/projects.data';
+import { getProjects } from '@/features/projects/data';
 
 export async function Projects() {
   const projects = await getProjects();

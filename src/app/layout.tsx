@@ -5,7 +5,7 @@ import '@/core/styles/globals.css';
 import { ButtonLink } from '@/core/ui/components/button-link';
 import { MobileNavigation, Navigation } from '@/core/ui/components/navigation';
 import { AuthorContactInfo } from '@/features/author/components/author-contact-info';
-import { getSite } from '@/features/site/site.data';
+import { getSite } from '@/features/site/data';
 import type { Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { RxGithubLogo } from 'react-icons/rx';

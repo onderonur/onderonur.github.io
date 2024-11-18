@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/core/shadcn-ui/ui/card';
 import { ButtonLink } from '@/core/ui/components/button-link';
-import type { Project } from '@/features/projects/projects.schemas';
+import type { Project } from '@/features/projects/schemas';
 import Image from 'next/image';
 
 type ProjectCardProps = {

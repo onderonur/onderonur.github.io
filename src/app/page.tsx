@@ -1,10 +1,10 @@
-import { getMetadata } from '@/core/seo/seo.utils';
+import { getMetadata } from '@/core/seo/utils';
 import { Card, CardHeader } from '@/core/shadcn-ui/ui/card';
 import { Separator } from '@/core/shadcn-ui/ui/separator';
 import { MDXContent } from '@/core/ui/components/mdx-content';
 import { Prose } from '@/core/ui/components/prose';
-import { getAuthor } from '@/features/author/author.data';
 import { AuthorContactInfo } from '@/features/author/components/author-contact-info';
+import { getAuthor } from '@/features/author/data';
 import Image from 'next/image';
 
 export const metadata = getMetadata({

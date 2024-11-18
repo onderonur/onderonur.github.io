@@ -5,7 +5,7 @@ import {
   CardTitle,
 } from '@/core/shadcn-ui/ui/card';
 import { SkillIcon } from '@/features/skills/components/skill-icon';
-import type { Skill } from '@/features/skills/skills.schemas';
+import type { Skill } from '@/features/skills/schemas';
 
 type SkillCardProps = {
   skill: Skill;

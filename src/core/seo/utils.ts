@@ -1,6 +1,6 @@
-import type { MetaImages } from '@/core/seo/seo.types';
-import { getAuthor } from '@/features/author/author.data';
-import { getSite } from '@/features/site/site.data';
+import type { MetaImages } from '@/core/seo/types';
+import { getAuthor } from '@/features/author/data';
+import { getSite } from '@/features/site/data';
 import type { Metadata } from 'next';
 
 export async function getMetadata({

@@ -1,5 +1,5 @@
-import { getContents } from '@/features/content/content.data';
-import { experienceSchema } from './experience.schemas';
+import { getContents } from '@/features/contents/data';
+import { experienceSchema } from './schemas';
 
 export async function getExperiences() {
   const baseExperiences = await getContents({

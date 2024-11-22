@@ -3,6 +3,6 @@ Allow: /
 Disallow: /react-intersection-observer-hook/
 Disallow: /react-infinite-scroll-hook/
 Disallow: /svelte-github-explorer/
-Disallow: /nuxt-heroes-and-villains/
+Disallow: /nuxt-heroes/
 
 Sitemap: https://onderonur.github.io/sitemap.xml

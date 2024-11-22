@@ -48,11 +48,11 @@
         ]
       },
       {
-        "title": "rickql",
+        "title": "next-rickql",
         "description": "Client app for Rick and Morty API with TypeScript, Next.js, React & Apollo GraphQL",
-        "image": "/projects/rickql.jpg",
-        "demoUrl": "https://rick-and-morty-graphql.vercel.app/",
-        "sourceCodeUrl": "https://github.com/onderonur/rick-and-morty-graphql",
+        "image": "/projects/next-rickql.jpg",
+        "demoUrl": "https://next-rickql.vercel.app/",
+        "sourceCodeUrl": "https://github.com/onderonur/next-rickql",
         "techStack": [
           {
             "name": "TypeScript"
@@ -64,16 +64,19 @@
             "name": "React"
           },
           {
-            "name": "Apollo GraphQL"
+            "name": "TanStack Query"
+          },
+          {
+            "name": "GraphQL"
           }
         ]
       },
       {
-        "title": "tmdb-explorer",
-        "description": "A TMDb Explorer Application Created with Next.js",
-        "image": "/projects/tmdb-explorer.jpg",
-        "demoUrl": "https://tmdb-explorer.vercel.app/",
-        "sourceCodeUrl": "https://github.com/onderonur/tmdb-explorer",
+        "title": "next-moviez",
+        "description": "A movie explorer application built with Next.js",
+        "image": "/projects/next-moviez.jpg",
+        "demoUrl": "https://next-moviez-pi.vercel.app/",
+        "sourceCodeUrl": "https://github.com/onderonur/next-moviez",
         "techStack": [
           {
             "name": "TypeScript"
@@ -235,11 +238,11 @@
         ]
       },
       {
-        "title": "nuxt-heroes-and-villains",
+        "title": "nuxt-heroes",
         "description": "A small web app to list various characters from comics, movies, etc.",
-        "image": "/projects/nuxt-heroes-and-villains.jpg",
-        "demoUrl": "https://onderonur.github.io/nuxt-heroes-and-villains/",
-        "sourceCodeUrl": "https://github.com/onderonur/nuxt-heroes-and-villains",
+        "image": "/projects/nuxt-heroes.jpg",
+        "demoUrl": "https://onderonur.github.io/nuxt-heroes/",
+        "sourceCodeUrl": "https://github.com/onderonur/nuxt-heroes",
         "techStack": [
           {
             "name": "TypeScript"

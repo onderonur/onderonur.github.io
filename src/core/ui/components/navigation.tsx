@@ -59,6 +59,10 @@ export function MobileNavigation() {
                 className={twJoin(
                   'h-auto w-full flex-col gap-1',
                   link.href !== pathname && 'text-muted-foreground',
+                  // When there is a `background-color` for `hover`, that color stays until user clicks
+                  // somewhere else after clicking this link on a mobile device.
+                  // To prevent that color persistence after a navigation, we added this.
+                  'hover:bg-transparent',
                 )}
               >
                 <link.icon className="size-5" />

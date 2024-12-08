@@ -34,7 +34,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       lang="en"
       className={twJoin(
         inter.variable,
-        'font-sans',
+        'font-sans antialiased',
         'dark [color-scheme:dark]',
         // fluid font-size:
         // 14px - 16px for 640px - 1024px viewport
@@ -70,7 +70,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               className="ml-auto"
               aria-label="Source code on GitHub"
             >
-              <RxGithubLogo className="size-4" />
+              <RxGithubLogo />
             </ButtonLink>
           </header>
           <div className="mx-auto mt-16 w-full max-w-screen-lg px-4 py-8">

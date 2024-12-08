@@ -65,7 +65,7 @@ export function MobileNavigation() {
                   'hover:bg-transparent',
                 )}
               >
-                <link.icon className="size-5" />
+                <link.icon />
                 {link.title}
               </ButtonLink>
             </li>

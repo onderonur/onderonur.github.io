@@ -1,8 +1,8 @@
 import { DiScrum } from 'react-icons/di';
 import type { IconType } from 'react-icons/lib';
+import { LuCode } from 'react-icons/lu';
 import {
   SiApollographql,
-  SiAzuredevops,
   SiCss3,
   SiExpress,
   SiGatsby,
@@ -12,7 +12,6 @@ import {
   SiHtml5,
   SiJavascript,
   SiJest,
-  SiMicrosoftsqlserver,
   SiNestjs,
   SiNextdotjs,
   SiNodedotjs,
@@ -52,11 +51,11 @@ const iconBySkill: Record<string, IconType | undefined> = {
   socketio: SiSocketdotio,
   nuxt: SiNuxtdotjs,
   vuejs: SiVuedotjs,
-  mssql: SiMicrosoftsqlserver,
+  mssql: LuCode,
   postgresql: SiPostgresql,
   git: SiGit,
   github: SiGithub,
-  'azure-devops': SiAzuredevops,
+  'azure-devops': LuCode,
   npm: SiNpm,
   'agile-development': DiScrum,
 };

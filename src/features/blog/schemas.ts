@@ -8,6 +8,7 @@ export const baseBlogPostSchema = z.object({
   heroCaption: z.string().optional(),
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const blogPostSchema = baseBlogPostSchema.merge(
   z.object({
     path: z.string().min(1),

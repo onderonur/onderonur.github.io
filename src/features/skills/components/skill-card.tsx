@@ -3,7 +3,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from '@/core/shadcn-ui/ui/card';
+} from '@/core/shadcn-ui/components/card';
 import { SkillIcon } from '@/features/skills/components/skill-icon';
 import type { Skill } from '@/features/skills/schemas';
 

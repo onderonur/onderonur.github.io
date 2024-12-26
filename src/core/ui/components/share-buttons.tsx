@@ -4,7 +4,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/core/shadcn-ui/ui/tooltip';
+} from '@/core/shadcn-ui/components/tooltip';
 import {
   FacebookIcon,
   FacebookShareButton,

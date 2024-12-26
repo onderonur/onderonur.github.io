@@ -1,4 +1,4 @@
-import { Badge } from '@/core/shadcn-ui/ui/badge';
+import { Badge } from '@/core/shadcn-ui/components/badge';
 import {
   Card,
   CardContent,
@@ -6,7 +6,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/core/shadcn-ui/ui/card';
+} from '@/core/shadcn-ui/components/card';
 import { ButtonLink } from '@/core/ui/components/button-link';
 import type { Project } from '@/features/projects/schemas';
 import Image from 'next/image';

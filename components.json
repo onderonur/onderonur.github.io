@@ -13,7 +13,7 @@
   "aliases": {
     "components": "@/core/shadcn-ui",
     "utils": "@/core/shadcn-ui/utils",
-    "ui": "@/core/shadcn-ui/ui",
+    "ui": "@/core/shadcn-ui/components",
     "lib": "@/core/shadcn-ui/lib",
     "hooks": "@/core/shadcn-ui/hooks"
   },

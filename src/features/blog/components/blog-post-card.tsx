@@ -5,7 +5,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/core/shadcn-ui/ui/card';
+} from '@/core/shadcn-ui/components/card';
 import type { BlogPost } from '@/features/blog/schemas';
 import { formatBlogPostDate, getBlogPostDate } from '@/features/blog/utils';
 import Image from 'next/image';

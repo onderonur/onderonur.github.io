@@ -1,6 +1,6 @@
 import { getMetadata } from '@/core/seo/utils';
-import { Card, CardHeader } from '@/core/shadcn-ui/ui/card';
-import { Separator } from '@/core/shadcn-ui/ui/separator';
+import { Card, CardHeader } from '@/core/shadcn-ui/components/card';
+import { Separator } from '@/core/shadcn-ui/components/separator';
 import { MDXContent } from '@/core/ui/components/mdx-content';
 import { Prose } from '@/core/ui/components/prose';
 import { AuthorContactInfo } from '@/features/author/components/author-contact-info';

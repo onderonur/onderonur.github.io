@@ -5,8 +5,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/core/shadcn-ui/ui/card';
-import { Separator } from '@/core/shadcn-ui/ui/separator';
+} from '@/core/shadcn-ui/components/card';
+import { Separator } from '@/core/shadcn-ui/components/separator';
 import { MDXContent } from '@/core/ui/components/mdx-content';
 import { PageHeader, PageHeaderTitle } from '@/core/ui/components/page-header';
 import { Prose } from '@/core/ui/components/prose';

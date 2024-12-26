@@ -1,6 +1,6 @@
 import { Link } from '@/core/routing/components/link';
 import { JsonLd } from '@/core/seo/components/json-ld';
-import { TooltipProvider } from '@/core/shadcn-ui/ui/tooltip';
+import { TooltipProvider } from '@/core/shadcn-ui/components/tooltip';
 import '@/core/styles/globals.css';
 import { ButtonLink } from '@/core/ui/components/button-link';
 import { MobileNavigation, Navigation } from '@/core/ui/components/navigation';

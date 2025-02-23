@@ -5,11 +5,13 @@ import { BlogPosts } from '@/features/blog/components/blog-posts';
 const PAGE_TITLE = 'Blog';
 const PAGE_DESCRIPTION = 'Software Development Journey: Explore My Blog';
 
-export const metadata = getMetadata({
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  pathname: '/blog',
-});
+export async function generateMetadata() {
+  return await getMetadata({
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    pathname: '/blog',
+  });
+}
 
 export default function BlogPage() {
   return (

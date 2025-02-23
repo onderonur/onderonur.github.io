@@ -43,10 +43,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     >
       <body
         className={twJoin(
-          'grid min-h-screen grid-rows-[auto_1fr_auto] bg-background text-foreground',
+          'bg-background text-foreground grid min-h-screen grid-rows-[auto_1fr_auto]',
           // To prevent content to overflow screen horizontally.
           // Since `<body>` is `grid`, this is needed.
-          '[&>*]:min-w-0',
+          '*:min-w-0',
         )}
       >
         <JsonLd<WebSite>
@@ -58,7 +58,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           }}
         />
         <TooltipProvider>
-          <header className="fixed z-10 flex min-h-16 w-full items-center gap-2 bg-background/60 px-4 backdrop-blur sm:gap-6">
+          <header className="bg-background/60 fixed z-10 flex min-h-16 w-full items-center gap-2 px-4 backdrop-blur-sm sm:gap-6">
             <Link href="/" className="text-xl font-black">
               {site.title}
             </Link>
@@ -73,10 +73,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               <RxGithubLogo />
             </ButtonLink>
           </header>
-          <div className="mx-auto mt-16 w-full max-w-screen-lg px-4 py-8">
+          <div className="mx-auto mt-16 w-full max-w-(--breakpoint-lg) px-4 py-8">
             {children}
           </div>
-          <footer className="flex flex-col items-center gap-4 px-4 pb-32 pt-12 sm:pb-12">
+          <footer className="flex flex-col items-center gap-4 px-4 pt-12 pb-32 sm:pb-12">
             <AuthorContactInfo />
             <p className="text-sm">
               &copy; 2020 - {new Date().getFullYear()} All rights reserved

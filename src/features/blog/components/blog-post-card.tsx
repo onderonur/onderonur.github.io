@@ -17,8 +17,8 @@ type BlogPostCardProps = {
 export function BlogPostCard({ frontmatter }: BlogPostCardProps) {
   return (
     <Link href={frontmatter.path}>
-      <Card className="flex h-full flex-col overflow-hidden">
-        <div className="relative aspect-[4/3]">
+      <Card className="flex h-full flex-col overflow-hidden pt-0">
+        <div className="relative aspect-4/3">
           <Image
             className="object-cover"
             src={frontmatter.heroPath}

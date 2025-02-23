@@ -17,8 +17,8 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card className="flex h-full flex-col overflow-hidden">
-      <CardHeader className="p-0 pb-4">
+    <Card className="flex h-full flex-col overflow-hidden pt-0">
+      <CardHeader className="p-0">
         <div className="relative aspect-video">
           <Image
             className="object-cover"
@@ -30,7 +30,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </CardHeader>
       <CardContent className="flex-1">
         <CardTitle className="text-lg">{project.title}</CardTitle>
-        <CardDescription className="pb-4 pt-2 font-semibold">
+        <CardDescription className="pt-2 pb-4 font-semibold">
           {project.description}
         </CardDescription>
         <ul className="flex flex-wrap gap-1">

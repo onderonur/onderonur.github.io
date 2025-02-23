@@ -14,10 +14,10 @@ export function BlogPostHeader({
   return (
     <header>
       <div className="text-center">
-        <h1 className="m-0 bg-gradient-to-br from-rose-500 to-primary bg-clip-text pb-2 text-transparent">
+        <h1 className="to-primary !m-0 bg-linear-to-br from-rose-500 bg-clip-text pb-2 text-transparent">
           {title}
         </h1>
-        <p className="m-0 text-muted-foreground">
+        <p className="text-muted-foreground !m-0">
           Published at {formatBlogPostDate(publishedAt)}.
           {updatedAt && ` Last updated at ${formatBlogPostDate(updatedAt)}.`}
         </p>
@@ -29,7 +29,7 @@ export function BlogPostHeader({
         <figure>
           <div className="relative aspect-video">
             <Image
-              className="m-0 rounded-md object-cover"
+              className="!m-0 rounded-md object-cover"
               src={heroPath}
               alt={heroCaption ? stripHtml(heroCaption) : ''}
               priority

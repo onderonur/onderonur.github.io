@@ -11,7 +11,7 @@ export async function Projects() {
         return (
           <Section key={section.title}>
             <SectionTitle>{section.title}</SectionTitle>
-            <ul className="grid gap-4 grid-cols-autofill-64">
+            <ul className="grid-cols-autofill-64 grid gap-4">
               {section.items.map((project) => {
                 return (
                   <li key={project.title}>

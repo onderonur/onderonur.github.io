@@ -21,9 +21,8 @@ const nextConfig: NextConfig = {
       'eslint.config.mjs',
       'lint-staged.config.mjs',
       'next.config.ts',
-      'postcss.config.js',
+      'postcss.config.mjs',
       'prettier.config.mjs',
-      'tailwind.config.ts',
     ],
   },
 };

@@ -24,6 +24,8 @@ export function MDXContent({ components, options, ...rest }: MDXContentProps) {
         Image: BlogPostImage,
         CodeBlock,
         Showcase,
+        // TODO: Check this
+        // eslint-disable-next-line @typescript-eslint/no-misused-spread
         ...components,
       }}
       options={{

@@ -78,6 +78,8 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
             <MDXContent
               source={current.content}
               components={{
+                // TODO: Check this
+                // eslint-disable-next-line @typescript-eslint/no-misused-spread
                 ...components,
               }}
               options={{
@@ -102,7 +104,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
                 className="flex max-w-72 flex-row-reverse gap-1"
               >
                 <div>
-                  <div className="text-sm text-muted-foreground">Previous</div>
+                  <div className="text-muted-foreground text-sm">Previous</div>
                   <div className="line-clamp-2">{previous.data.title}</div>
                 </div>
                 <RxChevronLeft className="mt-5 size-6 flex-none" />
@@ -114,7 +116,7 @@ export default async function BlogPostPage(props: BlogPostPageProps) {
                 className="ml-auto flex max-w-72 gap-1"
               >
                 <div>
-                  <div className="text-sm text-muted-foreground">Next</div>
+                  <div className="text-muted-foreground text-sm">Next</div>
                   <div className="line-clamp-2">{next.data.title}</div>
                 </div>
                 <RxChevronRight className="mt-5 size-6 flex-none" />

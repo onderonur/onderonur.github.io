@@ -21,5 +21,5 @@ type PageHeaderDescriptionProps = {
 export function PageHeaderDescription({
   children,
 }: PageHeaderDescriptionProps) {
-  return <p className="text-lg text-muted-foreground">{children}</p>;
+  return <p className="text-muted-foreground text-lg">{children}</p>;
 }

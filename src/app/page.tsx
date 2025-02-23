@@ -7,10 +7,12 @@ import { AuthorContactInfo } from '@/features/author/components/author-contact-i
 import { getAuthor } from '@/features/author/data';
 import Image from 'next/image';
 
-export const metadata = getMetadata({
-  title: 'Home',
-  pathname: '/',
-});
+export async function generateMetadata() {
+  return await getMetadata({
+    title: 'Home',
+    pathname: '/',
+  });
+}
 
 export default async function HomePage() {
   const author = await getAuthor();
@@ -18,7 +20,7 @@ export default async function HomePage() {
   return (
     <main className="flex flex-col gap-12">
       <Card className="mx-auto p-6">
-        <CardHeader className="items-center gap-6 sm:flex-row">
+        <CardHeader className="items-center gap-6 p-6 sm:flex-row">
           <Image
             className="w-24 rounded"
             src={author.data.avatarPath}
@@ -29,7 +31,7 @@ export default async function HomePage() {
           <div className="flex flex-col items-center gap-1 text-center">
             <div>
               <h1 className="text-3xl font-black">{author.data.name}</h1>
-              <p className="text-xl font-bold text-muted-foreground">
+              <p className="text-muted-foreground text-xl font-bold">
                 {author.data.role}
               </p>
             </div>

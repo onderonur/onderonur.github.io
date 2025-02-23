@@ -14,9 +14,9 @@ type SkillCardProps = {
 export function SkillCard({ skill }: SkillCardProps) {
   return (
     <Card className="flex h-full flex-col">
-      <CardHeader className="flex-grow justify-center pb-4">
+      <CardHeader className="grow justify-center">
         <SkillIcon
-          className="mx-auto text-4xl text-muted-foreground"
+          className="text-muted-foreground mx-auto text-4xl"
           icon={skill.icon}
         />
       </CardHeader>

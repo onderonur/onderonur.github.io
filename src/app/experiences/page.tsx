@@ -17,17 +17,19 @@ const PAGE_TITLE = 'Experiences';
 const PAGE_DESCRIPTION =
   "Discover my professional journey, detailing the companies and roles I've been a part of.";
 
-export const metadata = getMetadata({
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  pathname: '/experiences',
-});
+export async function generateMetadata() {
+  return await getMetadata({
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    pathname: '/experiences',
+  });
+}
 
 export default async function ExperiencesPage() {
   const experiences = await getExperiences();
 
   return (
-    <main className="mx-auto flex max-w-screen-md flex-col gap-4">
+    <main className="mx-auto flex max-w-(--breakpoint-md) flex-col gap-4">
       <PageHeader>
         <PageHeaderTitle>{PAGE_TITLE}</PageHeaderTitle>
       </PageHeader>
@@ -64,7 +66,7 @@ export default async function ExperiencesPage() {
                   </div>
                 </CardHeader>
                 <Separator />
-                <CardContent className="pt-6">
+                <CardContent>
                   <Prose>
                     <MDXContent source={experience.content} />
                   </Prose>

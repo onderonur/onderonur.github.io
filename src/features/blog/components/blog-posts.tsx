@@ -5,7 +5,7 @@ export async function BlogPosts() {
   const blogPosts = await getBlogPosts();
 
   return (
-    <ul className="grid gap-4 grid-cols-autofill-64">
+    <ul className="grid-cols-autofill-64 grid gap-4">
       {blogPosts.map((blogPost) => {
         return (
           <li key={blogPost.slug}>

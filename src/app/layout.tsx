@@ -35,7 +35,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       className={twJoin(
         inter.variable,
         'font-sans antialiased',
-        'dark [color-scheme:dark]',
+        'dark scheme-dark',
         // fluid font-size:
         // 14px - 16px for 640px - 1024px viewport
         'text-[clamp(0.875rem,0.667rem+0.52vw,1rem)]',

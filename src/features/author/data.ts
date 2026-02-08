@@ -11,7 +11,7 @@ export async function getAuthor() {
     ...author,
     data: {
       ...author.data,
-      avatarPath: `/authors/${author.slug}/avatar.jpg`,
+      avatarPath: `/authors/${author.slug}/avatar.jpeg`,
     },
   }));
 

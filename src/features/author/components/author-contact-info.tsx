@@ -1,7 +1,6 @@
 import { ButtonLink } from '@/core/ui/components/button-link';
 import { FaXTwitter } from 'react-icons/fa6';
 import { RxEnvelopeClosed, RxGithubLogo, RxLinkedinLogo } from 'react-icons/rx';
-import { SiBluesky } from 'react-icons/si';
 
 const links = [
   {
@@ -13,11 +12,6 @@ const links = [
     href: 'https://www.linkedin.com/in/onderonur/',
     ariaLabel: 'LinkedIn profile',
     icon: RxLinkedinLogo,
-  },
-  {
-    href: 'https://bsky.app/profile/onderonur.bsky.social',
-    ariaLabel: 'Bluesky profile',
-    icon: SiBluesky,
   },
   {
     href: 'https://x.com/onderonur_',
